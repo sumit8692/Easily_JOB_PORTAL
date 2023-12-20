@@ -1,0 +1,19 @@
+{
+  "name": "easily-job-finder",
+  "version": "1.0.0",
+  "description": "Connect with the recruiter in an instant of a time.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "sumit shah",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "path": "^0.12.7"
+  }
+}
