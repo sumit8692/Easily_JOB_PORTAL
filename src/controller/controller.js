@@ -1,6 +1,9 @@
 class controller{
     index(req, res, next){
-        res.render('index', {});
+        res.render('index');
+    }
+    jobs(req, res, next){
+        res.render('jobs');
     }
 }
 

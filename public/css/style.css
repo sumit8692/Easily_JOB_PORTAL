@@ -1,0 +1,91 @@
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+
+.img-banner {
+    position: absolute;
+    left: 60%;
+    margin-top: 1%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite; /* Adjust the duration and timing function as needed */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.container {
+    display: inline-block;
+}
+
+.typed-out {
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    animation: typing 10s infinite cubic-bezier(0.42, 0, 0.58, 1); /* ease-in-out timing function */
+    font-size: 2rem;
+    width: 0;
+    color: rgb(147, 79, 27);
+    position: absolute;
+    top: 500%;
+    left: 10%;
+}
+
+@keyframes typing {
+    0%, 100% {
+        width: 0;
+    }
+    50% {
+        width: 30%;
+    }
+}
+
+.below-typewriter{
+    position: absolute;
+    top: 600%;
+    left: 10%;
+    color: white;
+}
+
+.above-typewriter{
+    position: absolute;
+    top: 350%;
+    left: 10%;
+    color: white;
+}
+
+.btn-container{
+    position: absolute;
+    top: 700%;
+    left: 10%;
+}
+
+/* .icons{
+   
+} */
+#whatsapp{
+    color: rgb(94, 230, 94);
+    font-size: 15px;
+    margin: 2px;
+}
+#linkedin{
+    color: rgb(36, 115, 212);
+    font-size: 15px;
+    margin: 2px;
+}
+#twitter{
+    color: rgb(37, 119, 206);
+    font-size: 15px;
+    margin: 2px;
+}
+#instagram{
+    color: rgb(236, 107, 78);
+    font-size: 15px;
+    margin: 2px;
+}
