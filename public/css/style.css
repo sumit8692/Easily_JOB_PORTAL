@@ -66,9 +66,6 @@ body {
     left: 10%;
 }
 
-/* .icons{
-   
-} */
 #whatsapp{
     color: rgb(94, 230, 94);
     font-size: 15px;
@@ -89,3 +86,65 @@ body {
     font-size: 15px;
     margin: 2px;
 }
+
+.login{
+   width: 40%;
+   height: 30%;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
+   margin-top: 10%;
+   margin-left: 40%;
+   border-top: 5px rgb(18, 18, 49) solid;
+   border-left: 2px rgb(18, 18, 49) solid;
+   border-radius: 10px;
+   border-right: 1px grey solid;
+   border-bottom: 1px grey solid;
+   padding-bottom: 10px;
+   padding-top: 10px;
+}
+
+.main-page{
+    background-color: rgb(18, 18, 49);
+}
+
+@keyframes haphazard {
+    0% {
+      top: 300%;
+      left: 30%;
+    }
+    25% {
+      top: 50%;
+      left: 70%;
+    }
+    50% {
+      top: 10%;
+      left: 20%;
+    }
+    75% {
+      top: 90%;
+      left: 50%;
+    }
+    100% {
+      top: 300%;
+      left: 30%;
+    }
+  }
+
+  .oops {
+    color: white;
+    font-size: 100px;
+    position: absolute;
+    top: 300%;
+    left: 30%;
+    animation: haphazard 5s infinite; /* Adjust the duration as needed */
+  }
+
+  .error-message-recruiter{
+    color: rgb(236, 107, 78);
+    font-size: 35px;;
+    position: absolute;
+    top: 650%;
+    left: 8%;
+  }
