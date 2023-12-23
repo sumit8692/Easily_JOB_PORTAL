@@ -148,3 +148,57 @@ body {
     top: 650%;
     left: 8%;
   }
+
+  .post-new-job{
+    border: 2px red solid;
+
+  }
+
+  .active-hiring-css{
+    border: 2px green solid;
+    background-color: rgba(27, 27, 130, 0.821);
+    width: 50%;
+    height: 30%;
+    color: white;
+    border-radius: 5px;
+    
+  }
+  
+  .view-details-btn{
+    background-color: transparent;
+    border: 2px green solid;
+    color: green;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .company-name{
+    color: goldenrod;
+    font-size: 20px;
+    margin: 5px;
+  }
+  .job-category{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    display:inline-block
+  }
+  .role{
+    color: rgb(77, 169, 239);
+    font-size: 20px;
+    margin: 5px;
+    display:inline-block;
+   
+  }
+  .location{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    margin-left: 3px;
+  }
+  .package{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }

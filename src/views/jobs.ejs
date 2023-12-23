@@ -1,1 +1,20 @@
-<h1>JOBS</h1>
+<div class="card-container" style="display: flex; flex-wrap: wrap; justify-content: space-around;"></div>
+<% jobs.forEach(job => { %>
+<div class="card m-5 row" style="width: 20rem; background-color: transparent; border: 2px white solid; display:inline-block;">
+    <div class="card-body">
+      <div class="active-hiring-css p-2 mb-3">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(9, 179, 9);"></i></div>
+      <div class="company-name"><%= job.company_name %></div>
+      <div class="job-category"><%= job.job_category %></div>
+      <div class="role"> <%= job.role %></div>
+      <div class="location"><i class="fa-solid fa-location-dot"></i></i><%= job.location %></div>
+      <div class="package"> &#8377;<%= job.pack %></div>
+      <div class="tech-stacks"></div>
+            <% job.skills.forEach(skill => { %>
+            <button type="button" class="btn btn-outline-info ml-1 mb-1 "><%= skill %></button>
+            <% }) %>
+      <a href="/jobs/<%= job.job_id %>" class="card-link"><button class=" view-details-btn">View Details</button></a>
+    </div>
+</div>
+<% }) %>
+</div>
+

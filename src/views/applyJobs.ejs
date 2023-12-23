@@ -1,0 +1,17 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Apply for the Job</h1>
+      <br/><br/>
+      <h3 style="font-size: 40px;"> <span style="color: rgb(147, 9, 9); font-size: 40px;"><%= jobDetails.role %></span><span style="color: rgb(4, 101, 4)"> oppurtunity in </i><%= jobDetails.location%> at </span> <span style="color: rgb(4, 101, 4)"></span><span style="color: rgb(28, 186, 186);"><%= jobDetails.company_name %></span></h3>
+    </div>
+  </div>
+  <div class="p-2 mt-4 mb-4" style="background-color: yellow; color: black; height: 40px; width:150px; display: inline-block">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(18, 20, 18);"></i></div><i class="fa-regular fa-pen-to-square mx-3" style="color: rgb(23, 123, 162); font-size: 25px;"></i><i class="fa-solid fa-xmark" style="color:red; font-size: 25px;"></i>
+  <div class="company-details">
+    <div class="company-name"><%= jobDetails.company_name %></div>
+    <div class="job-category"><%= jobDetails.job_category %> <%= jobDetails.role %></div>
+    <div class="location"><i class="fa-solid fa-location-dot"></i><%= jobDetails.location%></div>
+    <div class="package">Package: &#8377;<%= jobDetails.pack %></div>
+    <div class="apply-by-date"><i class="fa-solid fa-clock"></i>Apply By: <%= jobDetails.apply_by %></div>
+    <div class="number-of-openings">Number of openings: <%= jobDetails.numberofopenings %></div>
+    <div class="applicants" style="color: red"><i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %></div>
+  </div>

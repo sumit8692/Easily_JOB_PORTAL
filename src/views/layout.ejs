@@ -26,13 +26,13 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Recruiter
+                <%= locals.userEmail ? 'local.userName' : 'Recruiter' %>
               </a>
               <ul class="dropdown-menu text-secondary">
-                <li><a class="dropdown-item" href="/login">Login</a></li>
+                <li><a class="dropdown-item" href="/login"><%= locals.userEmail ? 'Logout' : 'Login' %></a></li>
                 <li><hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/postjob">Post New Job</a></li>
+                <li><a class="dropdown-item" href="/newjob">Post New Job</a></li>
               </ul>
             </li>
           </ul>

@@ -1,0 +1,66 @@
+<div class="Post a new Job">
+    
+    <form class="row m-5" action="/newjob" method="post" enctype="multipart/form-data">
+        <h3 style="text-align: center;"> Post a New Job</h3>
+        <select class="form-control m-2">
+            <option selected disabled>select job category</option>
+            <option>Tech</option>
+            <option>Non Tech</option>
+          </select>
+
+          <select class="form-control m-2">
+            <option selected disabled>select job designation</option>
+            <option>HR</option>
+            <option>SDE</option>
+            <option>DevOps</option>
+            <option>Mern Developer</option>
+            <option>Mean Developer</option>
+            <option>JAVA Developer</option>
+            <option>Front-End Developer</option>
+            <option>Back-End Developer</option>
+          </select>
+        <div class="form-group mt-1" style="padding-bottom: 10px; width: 200%">
+          <label for="joblocation">Enter job location</label>
+          <input type="joblocation" class="form-control" id="joblocation" placeholder="Bengaluru" required>
+        </div>
+
+        <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Company Name</span>
+            <input type="text" class="form-control" placeholder="XYZ" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Salary" aria-label="Username" aria-describedby="basic-addon1">
+         
+              <span class="input-group-text" id="basic-addon1">Total Positions</span>
+       
+            <input type="text" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        
+
+        <div class="input-group mb-3">
+            <div class="form-group">
+                <select multiple class="form-control" id="exampleFormControlSelect2">
+                  <option selected disabled>Select Skills required for this job</option>
+                  <option>React</option>
+                  <option>NodeJs</option>
+                  <option>Angular</option>
+                  <option>MongoDB</option>
+                  <option>SQL</option>
+                  <option>Express</option>
+                  <option>Java</option>
+                  <option>SpringBoot</option>
+                  <option>C++</option>
+                  <option>Data Structures & Algo</option>
+                </select>
+              </div>
+              <span class="input-group-text" id="inputGroup-sizing-lg">Apply By</span>
+            <input type="date" id="apply_by" name="apply_by">
+        </div>
+        
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+
+</div>

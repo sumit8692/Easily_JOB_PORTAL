@@ -18,4 +18,6 @@ export default class UserModel{
         );
         users.push(newUser);
     }
+
+    
 }
