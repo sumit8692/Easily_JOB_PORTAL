@@ -1,80 +1,79 @@
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Apply for the Job</h1>
-      <br/><br/>
-      <h3 style="font-size: 40px;"> <span style="color: rgb(147, 9, 9); font-size: 40px;"><%= jobDetails.role %></span><span style="color: rgb(4, 101, 4)"> oppurtunity in </i><%= jobDetails.location%> at </span> <span style="color: rgb(4, 101, 4)"></span><span style="color: rgb(28, 186, 186);"><%= jobDetails.company_name %></span></h3>
-    </div>
-  </div>
-  <div class="p-2 mt-4 mb-4" style="background-color: yellow; color: black; height: 40px; width:150px; display: inline-block">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(18, 20, 18);"></i></div><a href="/update/<%= jobDetails.job_id %>"><i class="fa-regular fa-pen-to-square mx-3" style="color: rgb(23, 123, 162); font-size: 25px;"></i></a><a href="/delete/<%= jobDetails.job_id %>"><i class="fa-solid fa-xmark" style="color:red; font-size: 25px;"></i></a>
-  <div class="company-details">
-    <div class="company-name m-2"><%= jobDetails.company_name %></div>
-    <div class="job-category m-2"><%= jobDetails.job_category %> <%= jobDetails.role %></div>
-    <div class="location m-2"><i class="fa-solid fa-location-dot"></i><%= jobDetails.location%></div>
-    <div class="package m-2">Package: &#8377;<%= jobDetails.pack %></div>
-    <div class="apply-by-date m-2"><i class="fa-solid fa-clock"></i>Apply By: <%= jobDetails.apply_by %></div>
-    <div class="number-of-openings m-2">Number of openings: <%= jobDetails.numberofopenings %></div>
-    <div class="applicants m-2" style="color: red"><i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %></div>
-    <div class="tech-stacks m-3"></div>
-            <% jobDetails.skills.forEach(skill => { %>
-            <button type="button" class="btn btn-outline-info ml-1 mb-1 "><%= skill %></button>
-            <% }) %>
-    </div>
-    
-
-
-
-
-<!-- Button trigger modal -->
-<button type="button " class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Apply Now
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="color: green;">Easily</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div style="border: 2px rgba(135, 128, 128, 0.884) solid;padding: 30px; border-radius: 10px; margin: 5px">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+        <h1 class="display-4">Apply for the Job</h1>
+        <br/><br/>
+        <h3 style="font-size: 40px;"> <span style="color: rgb(147, 9, 9); font-size: 40px;"><%= jobDetails.role %></span><span style="color: rgb(4, 101, 4)"> oppurtunity in </i><%= jobDetails.location%> at </span> <span style="color: rgb(4, 101, 4)"></span><span style="color: rgb(28, 186, 186);"><%= jobDetails.company_name %></span></h3>
         </div>
-        <div class="modal-body">
-            <div style="border-left: 2px black solid;border-top: 5px black solid; padding: 20px; border-radius: 10px; margin: 50px;">
-            <form action="" method="post">
-                    <h3 style="text-align: center;" class=" m-3">apply in less than 1 minute</h3>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="name">Name</span>
-                    <input type="text" class="form-control" placeholder="Enter your name" aria-label="Username" aria-describedby="name">
-                    </div>
+    </div>
+    <div class="p-2 mt-4 mb-4" style="background-color: yellow; color: black; height: 40px; width:150px; display: inline-block">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(18, 20, 18);"></i></div><a href="/update/<%= jobDetails.job_id %>"><i class="fa-regular fa-pen-to-square mx-3" style="color: rgb(23, 123, 162); font-size: 25px;"></i></a><a href="/delete/<%= jobDetails.job_id %>"><i class="fa-solid fa-xmark" style="color:red; font-size: 25px;"></i></a>
+    <div class="company-details">
+        <div class="company-name m-2"><%= jobDetails.company_name %></div>
+        <div class="job-category m-2"><%= jobDetails.job_category %> <%= jobDetails.role %></div>
+        <div class="location m-2"><i class="fa-solid fa-location-dot"></i><%= jobDetails.location%></div>
+        <div class="package m-2">Package: &#8377;<%= jobDetails.pack %></div>
+        <div class="apply-by-date m-2"><i class="fa-solid fa-clock"></i>Apply By: <%= jobDetails.apply_by %></div>
+        <div class="number-of-openings m-2">Number of openings: <%= jobDetails.numberofopenings %></div>
+        <div class="applicants m-2" style="color: red"><i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %></div>
+        <div class="tech-stacks m-3"></div>
+                <% jobDetails.skills.forEach(skill => { %>
+                <button type="button" class="btn btn-outline-info ml-1 mb-1 "><%= skill %></button>
+                <% }) %>
+        </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Contact">Email</span>
-                    <input type="text" class="form-control" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="name">Contact</span>
-                    <input type="text" class="form-control" type = 'tel' placeholder="+91 ____ __ ____" aria-label="Username" aria-describedby="name">
-                    </div>
-                    
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Resume">Resume</span>
-                        <input type="file" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                          <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-success" style="width: 50%;">Submit</button>
-                          </div>
+    <!-- Button trigger modal -->
+    <button type="button " class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Apply Now
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: green;">Easily</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div style="border-left: 2px black solid;border-top: 5px black solid; padding: 20px; border-radius: 10px; margin: 50px;">
+                <form action="" method="post">
+                        <h3 style="text-align: center;" class=" m-3">apply in less than 1 minute</h3>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="name">Name</span>
+                        <input type="text" class="form-control" placeholder="Enter your name" aria-label="Username" aria-describedby="name">
                         </div>
-                      </div>
-              </form>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="Contact">Email</span>
+                        <input type="text" class="form-control" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="name">Contact</span>
+                        <input type="text" class="form-control" type = 'tel' placeholder="+91 ____ __ ____" aria-label="Username" aria-describedby="name">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="Resume">Resume</span>
+                            <input type="file" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-success" style="width: 50%;">Submit</button>
+                            </div>
+                            </div>
+                        </div>
+                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
-      </div>
     </div>
-  </div>
 
+    </div>
+    
 </div>
