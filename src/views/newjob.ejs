@@ -1,14 +1,13 @@
-
-<div style="border: 2px rgba(135, 128, 128, 0.884) solid;padding: 30px; border-radius: 10px; margin: 5px; display: flex; justify-content: center; align-items: center;">
-    <form class="row m-5" action="/newjob" method="post" enctype="multipart/form-data">
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
+    <form action="/newjob" method="post" enctype="multipart/form-data" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
         <h3 style="text-align: center;"><%= update ? 'Update Job' : 'Post a New Job' %></h3>
-        <select class="form-control m-2" >
+        <select class="form-control m-2">
             <option selected disabled>select job category</option>
             <option>Tech</option>
             <option>Non Tech</option>
-          </select>
+        </select>
 
-          <select class="form-control m-2">
+        <select class="form-control m-2">
             <option selected disabled>select job designation</option>
             <option>HR</option>
             <option>SDE</option>
@@ -18,50 +17,44 @@
             <option>JAVA Developer</option>
             <option>Front-End Developer</option>
             <option>Back-End Developer</option>
-          </select>
+        </select>
+
         <div class="form-group mt-1" style="padding-bottom: 10px; width: 200%">
-          <label for="joblocation">Enter job location</label>
-          <input type="joblocation" class="form-control" id="joblocation" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location : '' %>" required>
+            <label for="joblocation">Enter job location</label>
+            <input type="joblocation" class="form-control" id="joblocation" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location : '' %>" required>
         </div>
 
         <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Company Name</span>
+            <span class="input-group-text" id="basic-addon1">Company Name</span>
             <input type="text" class="form-control" placeholder="eg: XYZ" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.company_name : '' %>" required>
         </div>
 
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Salary" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.pack : '' %>" required>
-         
-              <span class="input-group-text" id="basic-addon1">Total Positions</span>
-       
+            <span class="input-group-text" id="basic-addon1">Total Positions</span>
             <input type="text" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.numberofopenings : '' %>">
         </div>
-
-        
 
         <div class="input-group mb-3">
             <div class="form-group">
                 <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option disabled>Select Skills required for this job</option>
+                    <option disabled>Select Skills required for this job</option>
                     <option value="React">React</option>
                     <option value="NodeJs" %>>NodeJs</option>
                     <option value="Angular" %>>Angular</option>
-                    <option value="MongoDB"  %>>MongoDB</option>
-                    <option value="SQL" >SQL</option>
-                    <option value="Express" >Express</option>
+                    <option value="MongoDB" %>>MongoDB</option>
+                    <option value="SQL">SQL</option>
+                    <option value="Express">Express</option>
                     <option value="Java">Java</option>
                     <option value="SpringBoot">SpringBoot</option>
                     <option value="C++">C++</option>
                     <option value="Data Structures & Algo">Data Structures & Algo</option>
                 </select>
-              </div>
-              <span class="input-group-text" id="inputGroup-sizing-lg">Apply By</span>
+            </div>
+            <span class="input-group-text" id="inputGroup-sizing-lg">Apply By</span>
             <input type="date" id="apply_by" name="apply_by">
         </div>
-        
 
         <button type="submit" class="btn btn-success">Submit</button>
-      </form>
-
-</div>
+    </form>
 </div>
