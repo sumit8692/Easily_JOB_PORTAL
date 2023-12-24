@@ -24,7 +24,7 @@ class controller{
 
 
     postnewjob(req, res, next){
-        res.render('newjob',{isMainPage: false})
+        res.render('newjob',{isMainPage: false, update: false})
     }
 
 
@@ -48,6 +48,30 @@ class controller{
         const id = req.params.id;
         const jobDetails = jobsModel.getJobDetails(id);
         res.render('applyJobs', {isMainPage: false, jobDetails })
+    }
+
+    deleteJob(req, res, next){
+        const id = req.params.id;
+        jobsModel.delete(id);
+        res.redirect('/jobs');
+    }
+
+    update(req, res, next){
+        const id = req.params.id;
+        const jobDetails = jobsModel.getJobDetails(id);
+        res.render('newjob', {isMainPage: false, update: true, jobDetails} )
+
+    }
+
+    search(req, res, next){
+        const query = req.query.query; // Get the search query from the request
+
+        console.log(query);
+        // Implement your search logic here
+        // For example, if you have a jobs array
+    
+        // Render the search results or handle them as needed
+        // res.render('searchResults', { results: searchResults, query: query });
     }
     // postJob(req, res, next){
         

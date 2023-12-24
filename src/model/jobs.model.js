@@ -67,4 +67,12 @@ export default class jobsModel{
     static getJobDetails(id){
         return jobs.find((job) => job.job_id == id);
     }
+
+    static delete(id){
+        const index = jobs.findIndex((j) => {
+            j.id == id
+        });
+
+        jobs.splice(index,1);
+    }
 }

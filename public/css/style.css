@@ -202,3 +202,8 @@ body {
     margin: 5px;
     margin-bottom: 10px;
   }
+
+  .applyform{
+    border: 2px black solid;
+    margin-right: 40px;
+  }

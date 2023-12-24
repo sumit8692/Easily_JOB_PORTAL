@@ -16,12 +16,15 @@ server.use(express.urlencoded({extended: true}));
 
 
 server.get('/', control.index);
-server.get('/jobs/', control.jobs);
+server.get('/jobs', control.jobs);
 server.get('/jobs/:id', control.applyJobs);
 server.get('/login', control.login);
 server.get('/newjob', control.postnewjob);
 server.get('/logout', control.logout);
 
-server.post('/', )
-// server.post('/newjob', control.postJob);
+
+server.get('/delete/:id', control.deleteJob);
+server.get('/update/:id', control.update);
+server.get('/search', control.search);
+
 export default server;
