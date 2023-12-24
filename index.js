@@ -21,10 +21,11 @@ server.get('/jobs/:id', control.applyJobs);
 server.get('/login', control.login);
 server.get('/newjob', control.postnewjob);
 server.get('/logout', control.logout);
-
-
 server.get('/delete/:id', control.deleteJob);
 server.get('/update/:id', control.update);
 server.get('/search', control.search);
+
+server.post('/login', control.getlogin);
+server.post("/registerRecruiter", control.registerRecruiter);
 
 export default server;

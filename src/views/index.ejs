@@ -20,20 +20,21 @@
         <button style="position: absolute; right: 20px; top: 20px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="modal-header">
            
-            <form action="/" method="post">
+            <form action="/registerRecruiter" method="post">
                 <h3>Experience Easily!</h3>
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="password" class="form-control" id="name" placeholder="Enter your Name" required>
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" required>
                   </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Enter your Email address</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your email" required>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Enter your Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter your email" required>
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
+                
                 <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter your Password" required>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
               </form>

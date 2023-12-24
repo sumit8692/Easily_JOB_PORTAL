@@ -1,3 +1,6 @@
+let recruiterUsers = [];
+
+
 export default class RecruiterModel {
     constructor(id, name, email, password) {
       this.id = id;
@@ -8,16 +11,16 @@ export default class RecruiterModel {
   
     static add(name, email, password) {
       const newUser = new RecruiterModel(
-        users.length + 1,
+        recruiterUsers.length + 1,
         name,
         email,
         password
       );
-      users.push(newUser);
+      recruiterUsers.push(newUser);
     }
   
     static isValidUser(email, password) {
-      const result = users.find(
+      const result = recruiterUsers.find(
         (u) =>
           u.email == email && u.password == password
       );
@@ -25,4 +28,3 @@ export default class RecruiterModel {
     }
   }
   
-  var Recruiterusers = [];

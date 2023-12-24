@@ -19,30 +19,30 @@
             <option>Back-End Developer</option>
         </select>
 
-        <div class="form-group mt-1" style="padding-bottom: 10px; width: 200%">
+        <div class="form-group m-2" style="padding-bottom: 10px; width: 100%">
             <label for="joblocation">Enter job location</label>
             <input type="joblocation" class="form-control" id="joblocation" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location : '' %>" required>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group m-2">
             <span class="input-group-text" id="basic-addon1">Company Name</span>
             <input type="text" class="form-control" placeholder="eg: XYZ" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.company_name : '' %>" required>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group m-2">
             <input type="text" class="form-control" placeholder="Salary" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.pack : '' %>" required>
             <span class="input-group-text" id="basic-addon1">Total Positions</span>
             <input type="text" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.numberofopenings : '' %>">
         </div>
 
-        <div class="input-group mb-3">
-            <div class="form-group">
-                <select multiple class="form-control" id="exampleFormControlSelect2">
+        <div class="input-group m-2" style="display: flex; width: 100%;">
+            <div class="form-group" style="flex-grow: 1;">
+                <select multiple class="form-control" id="exampleFormControlSelect2" style="width: 100%;">
                     <option disabled>Select Skills required for this job</option>
                     <option value="React">React</option>
-                    <option value="NodeJs" %>>NodeJs</option>
-                    <option value="Angular" %>>Angular</option>
-                    <option value="MongoDB" %>>MongoDB</option>
+                    <option value="NodeJs">NodeJs</option>
+                    <option value="Angular">Angular</option>
+                    <option value="MongoDB">MongoDB</option>
                     <option value="SQL">SQL</option>
                     <option value="Express">Express</option>
                     <option value="Java">Java</option>
@@ -51,10 +51,10 @@
                     <option value="Data Structures & Algo">Data Structures & Algo</option>
                 </select>
             </div>
-            <span class="input-group-text" id="inputGroup-sizing-lg">Apply By</span>
-            <input type="date" id="apply_by" name="apply_by">
+            <span class="input-group-text" id="inputGroup-sizing-lg" style="width: 20%;">Apply By</span>
+            <input type="date" id="apply_by" name="apply_by" style="width: 30%;">
         </div>
 
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success m-2">Submit</button>
     </form>
 </div>

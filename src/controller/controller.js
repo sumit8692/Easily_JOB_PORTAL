@@ -39,10 +39,6 @@ class controller{
         })
     }
 
-    postRecruiter(req, res, next){
-        const {name, email, password} = req.body;
-        RecruiterModel.add(name, email, password);
-    }
 
     applyJobs(req, res, next){
         const id = req.params.id;
@@ -61,6 +57,20 @@ class controller{
         const jobDetails = jobsModel.getJobDetails(id);
         res.render('newjob', {isMainPage: false, update: true, jobDetails} )
 
+    }
+
+    registerRecruiter(req, res, next){
+        const {name, email, password} = req.body;
+        console.log(name, email, password);
+        RecruiterModel.add(name, email, password);
+        res.redirect('/login');
+    }
+
+    getlogin(req, res, next){
+        const {email, password} = req.body;
+        console.log(email, password)
+        RecruiterModel.isValidUser(email, password);
+        res.redirect('jobs');
     }
 
     search(req, res, next){
