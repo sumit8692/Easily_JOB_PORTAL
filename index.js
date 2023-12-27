@@ -2,7 +2,7 @@ import express from 'express';
 import ejsLayouts from 'express-ejs-layouts';
 import controller from './src/controller/controller.js';
 import path from 'path';
-
+import { uploadFile } from './src/middlewares/fileupload.middleware.js';
 const server = express();
 
 const control = new controller();
@@ -27,5 +27,6 @@ server.get('/search', control.search);
 
 server.post('/login', control.getlogin);
 server.post("/registerRecruiter", control.registerRecruiter);
+server.post("/applyJobs", uploadFile.single('imageUrl'), controller.applyJob);
 
 export default server;

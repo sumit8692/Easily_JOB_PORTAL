@@ -36,7 +36,7 @@
             </div>
             <div class="modal-body">
                 <div style="border-left: 2px black solid;border-top: 5px black solid; padding: 20px; border-radius: 10px; margin: 50px;">
-                <form action="" method="post">
+                <form action="/applyJobs" method="post" enctype="multipart/form-data">
                         <h3 style="text-align: center;" class=" m-3">apply in less than 1 minute</h3>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="name">Name</span>
@@ -55,7 +55,7 @@
                         
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="Resume">Resume</span>
-                            <input type="file" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" type="file" name="imageUrl" id="imageUrl" accept="images/*" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <div class="container">
                             <div class="row">

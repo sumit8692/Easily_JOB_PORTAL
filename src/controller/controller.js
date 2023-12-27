@@ -1,6 +1,6 @@
 import RecruiterModel from "../model/recruiter.model.js";
 import jobsModel from "../model/jobs.model.js";
-
+import candidateModel from "../model/jobspplied.js";
 class controller{
 
     index(req, res, next){
@@ -73,6 +73,14 @@ class controller{
         res.redirect('jobs');
     }
 
+    applyJobs(req, res){
+        const {name, email, contact }   = req.body;
+        const imageUrl = 'images/' + req.file.filename;
+
+        candidateModel.add(name, email, contact, imageUrl);
+        res.render('applyJobs', {});
+
+    }
     search(req, res, next){
         const query = req.query.query; // Get the search query from the request
 
