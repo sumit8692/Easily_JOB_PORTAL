@@ -10,7 +10,8 @@
     
     <div class="btn-container">
         <button type="button" class="btn btn-primary btn-lg m-2" data-bs-toggle="modal" data-bs-target="#button-1"><a href="/jobs" style="color: white; text-decoration: none;">I'm a Job Seeker</a></button>
-        <button type="button" class="btn btn-primary btn-lg  m-2" data-bs-toggle="modal" data-bs-target="#button-2">I'm a Recruiter</button>
+        <button <%= locals.userEmail ? 'disabled' : '' %> type="button" class="btn btn-primary btn-lg m-2" data-bs-toggle="modal" data-bs-target="#button-2">I'm a Recruiter</button>
+
     </div>
   
   <!-- Modal for Recruiter -->

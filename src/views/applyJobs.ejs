@@ -36,35 +36,36 @@
             </div>
             <div class="modal-body">
                 <div style="border-left: 2px black solid;border-top: 5px black solid; padding: 20px; border-radius: 10px; margin: 50px;">
-                <form action="/applyJobs" method="post" enctype="multipart/form-data">
-                        <h3 style="text-align: center;" class=" m-3">apply in less than 1 minute</h3>
+                    <form action="/applyJobs/<%= jobId %>" method="post" enctype="multipart/form-data">
+                        <h3 style="text-align: center;" class="m-3">Apply in less than 1 minute</h3>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="name">Name</span>
-                        <input type="text" class="form-control" placeholder="Enter your name" aria-label="Username" aria-describedby="name">
+                            <input type="text" class="form-control" name="name" placeholder="Enter your name" aria-label="Username" aria-describedby="name">
                         </div>
-
+                    
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="Contact">Email</span>
-                        <input type="text" class="form-control" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
+                            <input type="text" class="form-control" name="email" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
                         </div>
-
+                    
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="name">Contact</span>
-                        <input type="text" class="form-control" type = 'tel' placeholder="+91 ____ __ ____" aria-label="Username" aria-describedby="name">
+                            <input type="text" class="form-control" name="contact" type="tel" placeholder="+91 ____ __ ____" aria-label="Username" aria-describedby="name">
                         </div>
-                        
+                    
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="Resume">Resume</span>
-                            <input type="file" type="file" name="imageUrl" id="imageUrl" accept="images/*" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" name="imageUrl" id="imageUrl" accept="images/*" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
+                    
                         <div class="container">
                             <div class="row">
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-success" style="width: 50%;">Submit</button>
-                            </div>
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-success" style="width: 50%;">Submit</button>
+                                </div>
                             </div>
                         </div>
-                </form>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">

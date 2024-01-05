@@ -21,10 +21,13 @@ export default class RecruiterModel {
   
     static isValidUser(email, password) {
       const result = recruiterUsers.find(
-        (u) =>
-          u.email == email && u.password == password
+          (u) =>
+              u.email === email && u.password === password
       );
-      return result;
-    }
+      
+      // If result is undefined, return -1; otherwise, return the result
+      return result !== undefined ? result : -1;
+  }
+  
   }
   

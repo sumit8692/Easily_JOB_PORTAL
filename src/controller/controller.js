@@ -4,7 +4,7 @@ import candidateModel from "../model/jobspplied.js";
 class controller{
 
     index(req, res, next){
-        res.render('index', { isMainPage: true });
+        res.render('index', { isMainPage: true, userEmail: req.session.userEmail });
     }
     
     jobs(req, res, next){
@@ -14,17 +14,13 @@ class controller{
 
 
     login(req, res, next){
+
         res.render('login', { isMainPage: false });
     }
 
 
-    postjob(req, res, next){
-        res.render('err_on_job', { isMainPage: true});
-    }
-
-
     postnewjob(req, res, next){
-        res.render('newjob',{isMainPage: false, update: false})
+        res.render('newjob',{isMainPage: false, update: false, userEmail: req.session.userEmail })
     }
 
 
@@ -34,16 +30,17 @@ class controller{
                 console.log(err);
             }
             else{
-                res.redirect('/login');
+                res.locals.userEmail = null;
+                res.render('index', { isMainPage: true, userEmail: req.session.userEmail });
             }
         })
     }
 
 
     applyJobs(req, res, next){
-        const id = req.params.id;
-        const jobDetails = jobsModel.getJobDetails(id);
-        res.render('applyJobs', {isMainPage: false, jobDetails })
+        const jobId = req.params.id;
+        const jobDetails = jobsModel.getJobDetails(jobId);
+        res.render('applyJobs', {isMainPage: false, jobDetails, jobId })
     }
 
     deleteJob(req, res, next){
@@ -68,17 +65,26 @@ class controller{
 
     getlogin(req, res, next){
         const {email, password} = req.body;
+        const jobs = jobsModel.getAll();
         console.log(email, password)
-        RecruiterModel.isValidUser(email, password);
-        res.redirect('jobs');
+        if(RecruiterModel.isValidUser(email, password) != -1){
+            req.session.userEmail = email;
+            res.render('jobs', {isMainPage: true, jobs, userEmail: req.session.userEmail});
+        }else{
+            res.render('404error',{isMainPage: true, message: "Invalid Credentials"});
+        }
+       
     }
 
-    applyJobs(req, res){
+    jobsApplied(req, res){
+        const id = req.params.id;
+        const jobDetails = jobsModel.getJobDetails(id);
         const {name, email, contact }   = req.body;
+        const jobId = req.params.id;
         const imageUrl = 'images/' + req.file.filename;
-
-        candidateModel.add(name, email, contact, imageUrl);
-        res.render('applyJobs', {});
+        console.log(name, email, contact, jobId);
+        candidateModel.add(name, email, contact, imageUrl, jobId);
+        res.render('applyJobs', {isMainPage: false, jobDetails, jobId});
 
     }
     search(req, res, next){
