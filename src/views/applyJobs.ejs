@@ -1,3 +1,4 @@
+<div style="display: flex; justify-content: center; align-items: center; width: 100vw;">
 <div style="border: 2px rgba(135, 128, 128, 0.884) solid;padding: 30px; border-radius: 10px; margin: 5px">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -11,7 +12,7 @@
         <div class="company-name m-2"><%= jobDetails.company_name %></div>
         <div class="job-category m-2"><%= jobDetails.job_category %> <%= jobDetails.role %></div>
         <div class="location m-2"><i class="fa-solid fa-location-dot"></i><%= jobDetails.location%></div>
-        <div class="package m-2">Package: &#8377;<%= jobDetails.pack %></div>
+        <div class="package m-1">Package: &#8377;<%= jobDetails.pack %></div>
         <div class="apply-by-date m-2"><i class="fa-solid fa-clock"></i>Apply By: <%= jobDetails.apply_by %></div>
         <div class="number-of-openings m-2">Number of openings: <%= jobDetails.numberofopenings %></div>
         <div class="applicants m-2" style="color: red"><i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %></div>
@@ -25,7 +26,7 @@
     <button type="button " class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Apply Now
     </button>
-    
+</div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

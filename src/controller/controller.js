@@ -1,6 +1,36 @@
 import RecruiterModel from "../model/recruiter.model.js";
 import jobsModel from "../model/jobs.model.js";
 import candidateModel from "../model/jobspplied.js";
+import nodemailer from 'nodemailer';
+
+async function sendmail(maildId) {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'sumit8962@gmail.com',
+            pass: 'lxweffsqbacptank'
+        },
+    });
+
+    const mailOption = {
+        from: 'sumit8962@gmail.com', 
+        to: maildId,
+        subject: "Job Applied Successfully",
+        text: "Your job application has been successfully submitted to the company"
+    };
+
+    await transporter.sendMail(mailOption, (err, info) => {
+        if(err){
+            console.log("Error Occured: ", err);
+        }
+        else{
+            console.log("Email to user has been sent successfully", info.response);
+        }
+    })
+
+}
+
+
 class controller{
 
     index(req, res, next){
@@ -46,7 +76,7 @@ class controller{
     deleteJob(req, res, next){
         const id = req.params.id;
         jobsModel.delete(id);
-        res.redirect('/jobs');
+        res.redirect('jobs');
     }
 
     update(req, res, next){
@@ -82,8 +112,10 @@ class controller{
         const {name, email, contact }   = req.body;
         const jobId = req.params.id;
         const imageUrl = 'images/' + req.file.filename;
+        sendmail(email);
         console.log(name, email, contact, jobId);
         candidateModel.add(name, email, contact, imageUrl, jobId);
+        
         res.render('applyJobs', {isMainPage: false, jobDetails, jobId});
 
     }
@@ -97,13 +129,11 @@ class controller{
         // Render the search results or handle them as needed
         // res.render('searchResults', { results: searchResults, query: query });
     }
-    // postJob(req, res, next){
-        
-    //     let {company_name, job_category, role, location, package, skills} = req.body;
-    //     jobsModel.add(company_name, job_category, role, location, package, skills);
-    //     res.render('jobs', {});
-
-    // }
+    createJob(req, res, next){
+        const { company_name, job_category, role, location, pack, skills } = req.body;
+        jobsModel.add(company_name, job_category, role, location, pack, skills);
+        res.render('jobs', { isMainPage: true, jobs });
+    }
 
 
 

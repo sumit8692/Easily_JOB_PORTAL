@@ -4,13 +4,14 @@ import controller from './src/controller/controller.js';
 import path from 'path';
 import { uploadFile } from './src/middlewares/fileupload.middleware.js';
 import session from 'express-session';
-import { auth } from './src/middlewares/auth.js';
+import { auth} from './src/middlewares/auth.js';
 
 const server = express();
 
 const control = new controller();
 
-server.use(express.static('public'));
+server.use(express.static('public/'));
+// server.use(express.static('src/views'));
 server.use(session({
     secret: 'secretkey',
     resave: false, 
@@ -28,14 +29,15 @@ server.get('/', control.index);
 server.get('/jobs', control.jobs);
 server.get('/jobs/:id', control.applyJobs);
 server.get('/login', control.login);
-server.get('/newjob', auth, control.postnewjob);
+server.get('/newjob',  auth, control.postnewjob);
 server.get('/logout', control.logout);
-server.get('/delete/:id', control.deleteJob);
-server.get('/update/:id', control.update);
+server.get('/delete/:id/', auth, control.deleteJob);
+server.get('/update/:id',  control.update);
 server.get('/search', control.search);
 
 server.post('/login', control.getlogin);
 server.post("/registerRecruiter", control.registerRecruiter);
 server.post("/applyJobs/:id", uploadFile.single('imageUrl'), control.jobsApplied);
+server.post("/newjob", control.createJob);
 
 export default server;

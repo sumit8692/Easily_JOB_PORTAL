@@ -1,13 +1,14 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
     <form action="/newjob" method="post" enctype="multipart/form-data" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
         <h3 style="text-align: center;"><%= update ? 'Update Job' : 'Post a New Job' %></h3>
-        <select class="form-control m-2">
+    
+        <select class="form-control m-2" name="job_category">
             <option selected disabled>select job category</option>
             <option>Tech</option>
             <option>Non Tech</option>
         </select>
-
-        <select class="form-control m-2">
+    
+        <select class="form-control m-2" name="job_designation">
             <option selected disabled>select job designation</option>
             <option>HR</option>
             <option>SDE</option>
@@ -18,26 +19,26 @@
             <option>Front-End Developer</option>
             <option>Back-End Developer</option>
         </select>
-
+    
         <div class="form-group m-2" style="padding-bottom: 10px; width: 100%">
             <label for="joblocation">Enter job location</label>
-            <input type="joblocation" class="form-control" id="joblocation" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location : '' %>" required>
+            <input type="text" class="form-control" id="joblocation" name="job_location" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location : '' %>" required>
         </div>
-
+    
         <div class="input-group m-2">
             <span class="input-group-text" id="basic-addon1">Company Name</span>
-            <input type="text" class="form-control" placeholder="eg: XYZ" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.company_name : '' %>" required>
+            <input type="text" class="form-control" name="company_name" placeholder="eg: XYZ" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.company_name : '' %>" required>
         </div>
-
+    
         <div class="input-group m-2">
-            <input type="text" class="form-control" placeholder="Salary" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.pack : '' %>" required>
+            <input type="text" class="form-control" name="pack" placeholder="Salary" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.pack : '' %>" required>
             <span class="input-group-text" id="basic-addon1">Total Positions</span>
-            <input type="text" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.numberofopenings : '' %>">
+            <input type="text" class="form-control" name="numberofopenings" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.numberofopenings : '' %>">
         </div>
-
+    
         <div class="input-group m-2" style="display: flex; width: 100%;">
             <div class="form-group" style="flex-grow: 1;">
-                <select multiple class="form-control" id="exampleFormControlSelect2" style="width: 100%;">
+                <select multiple class="form-control" id="exampleFormControlSelect2" name="skills" style="width: 100%;">
                     <option disabled>Select Skills required for this job</option>
                     <option value="React">React</option>
                     <option value="NodeJs">NodeJs</option>
@@ -54,7 +55,8 @@
             <span class="input-group-text" id="inputGroup-sizing-lg" style="width: 20%;">Apply By</span>
             <input type="date" id="apply_by" name="apply_by" style="width: 30%;">
         </div>
-
+    
         <button type="submit" class="btn btn-success m-2">Submit</button>
     </form>
+    
 </div>
