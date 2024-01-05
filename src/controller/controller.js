@@ -39,12 +39,11 @@ class controller{
     
     jobs(req, res, next){
         const jobs = jobsModel.getAll();
-        res.render('jobs', { isMainPage: true, jobs });
+        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
     }
 
 
     login(req, res, next){
-
         res.render('login', { isMainPage: false });
     }
 
@@ -54,18 +53,19 @@ class controller{
     }
 
 
-    logout(req, res, next){
+    logout(req, res, next) {
         req.session.destroy((err) => {
-            if(err){
+            if (err) {
                 console.log(err);
+                
+            } else {
+                console.log(res.locals.userEmail);
+                res.locals.userEmail = false;
+                res.redirect('/index');
             }
-            else{
-                res.locals.userEmail = null;
-                res.render('index', { isMainPage: true, userEmail: req.session.userEmail });
-            }
-        })
+        });
     }
-
+    
 
     applyJobs(req, res, next){
         const jobId = req.params.id;

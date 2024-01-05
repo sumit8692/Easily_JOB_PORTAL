@@ -177,7 +177,12 @@ body {
     font-size: 20px;
     margin: 5px;
   }
- 
+  .job-category{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    display:inline-block
+  }
   .role{
     color: rgb(77, 169, 239);
     font-size: 20px;
@@ -185,6 +190,19 @@ body {
     display:inline-block;
    
   }
+  .location{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    margin-left: 3px;
+  }
+  .package{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }
+
   .applyform{
     border: 2px black solid;
     margin-right: 40px;
