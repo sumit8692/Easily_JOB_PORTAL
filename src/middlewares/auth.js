@@ -10,3 +10,14 @@ export const auth = (message) => {
         }
     };
 };
+export const loginauth = (req,res,next) => {
+    
+
+        if (req.session.userEmail) {
+            
+           res.redirect('/jobs')
+        } else {
+            
+           next();
+        }
+};

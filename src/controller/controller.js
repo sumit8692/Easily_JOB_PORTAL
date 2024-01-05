@@ -59,9 +59,8 @@ class controller{
                 console.log(err);
                 
             } else {
-                console.log(res.locals.userEmail);
                 res.locals.userEmail = false;
-                res.redirect('/index');
+                res.redirect('/');
             }
         });
     }

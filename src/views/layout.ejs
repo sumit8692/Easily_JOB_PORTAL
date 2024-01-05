@@ -29,7 +29,7 @@
                 Recruiter
               </a>
               <ul class="dropdown-menu text-secondary">
-                <li><a class="dropdown-item" href="/login"><%= locals.userEmail ? 'Logout' : 'Login' %></a></li>
+                <li><a class="dropdown-item" href="<%= locals.userEmail ? '/logout' : '/login' %>"><%= locals.userEmail ? 'Logout' : 'Login' %></a></li>
                 <li><hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="/newjob">Post New Job</a></li>

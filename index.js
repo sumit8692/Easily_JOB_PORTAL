@@ -4,7 +4,7 @@ import controller from './src/controller/controller.js';
 import path from 'path';
 import { uploadFile } from './src/middlewares/fileupload.middleware.js';
 import session from 'express-session';
-import { auth } from './src/middlewares/auth.js';
+import { auth, loginauth } from './src/middlewares/auth.js';
 
 const server = express();
 
@@ -28,7 +28,7 @@ server.use(express.urlencoded({extended: true}));
 server.get('/', control.index);
 server.get('/jobs', control.jobs);
 server.get('/jobs/:id', control.applyJobs);
-server.get('/login',control.login);
+server.get('/login', loginauth, control.login);
 server.get('/newjob', auth('Login as a Recruiter to post new job.'), control.postnewjob);
 server.get('/logout', control.logout);
 server.get('/delete/:id', auth('Allowed only by Recruiters.'), control.deleteJob);
