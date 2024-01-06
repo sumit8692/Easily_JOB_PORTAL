@@ -75,4 +75,22 @@ export default class jobsModel{
 
         jobs.splice(index,1);
     }
+    static searchJobs(query) {
+        // Convert the query to lowercase for case-insensitive search
+        const lowercaseQuery = query.toLowerCase();
+
+        // Use the filter method to find jobs that match the specified properties
+        const searchResults = jobs.filter((job) => {
+            return (
+                job.company_name.toLowerCase().includes(lowercaseQuery) ||
+                job.job_category.toLowerCase().includes(lowercaseQuery) ||
+                job.role.toLowerCase().includes(lowercaseQuery) ||
+                job.location.toLowerCase().includes(lowercaseQuery) ||
+                job.pack.toLowerCase().includes(lowercaseQuery) ||
+                job.skills.some((skill) => skill.toLowerCase().includes(lowercaseQuery))
+            );
+        });
+
+        return searchResults;
+    }
 }
