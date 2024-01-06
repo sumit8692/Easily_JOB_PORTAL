@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
-    <form action="/newjob" method="post" enctype="multipart/form-data" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
+    <form action="/newjob" method="post" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
         <h3 style="text-align: center;"><%= update ? 'Update Job' : 'Post a New Job' %></h3>
     
         <select class="form-control m-2" name="job_category">
@@ -58,5 +58,6 @@
     
         <button type="submit" class="btn btn-success m-2">Submit</button>
     </form>
+    
     
 </div>

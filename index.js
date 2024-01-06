@@ -29,7 +29,7 @@ server.get('/', control.index);
 server.get('/jobs', control.jobs);
 server.get('/jobs/:id', control.applyJobs);
 server.get('/login', loginauth, control.login);
-server.get('/newjob', auth('Login as a Recruiter to post new job.'), control.postnewjob);
+server.get('/newjob',  control.postnewjob);
 server.get('/logout', control.logout);
 server.get('/delete/:id', auth('Allowed only by Recruiters.'), control.deleteJob);
 server.get('/update/:id',  auth('Allowed only by Recruiters.'), control.update);

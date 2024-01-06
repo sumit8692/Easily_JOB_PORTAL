@@ -128,14 +128,14 @@ class controller{
         // Render the search results or handle them as needed
         // res.render('searchResults', { results: searchResults, query: query });
     }
+
     createJob(req, res, next){
-        const { company_name, job_category, role, location, pack, skills } = req.body;
-        jobsModel.add(company_name, job_category, role, location, pack, skills);
-        res.render('jobs', { isMainPage: true, jobs });
+        const { company_name, job_category, job_designation, job_location, pack, skills } = req.body;
+        jobsModel.add(company_name, job_category, job_designation, job_location, pack, skills);
+        const jobs = jobsModel.getAll();
+        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
     }
-
-
-
+    
 
 }
 
