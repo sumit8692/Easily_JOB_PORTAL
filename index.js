@@ -6,6 +6,7 @@ import path from 'path';
 import { uploadFile } from './src/middlewares/fileupload.middleware.js';
 import session from 'express-session';
 import { auth, loginauth } from './src/middlewares/auth.js';
+import { validateRequestapplyjobs, validateRequestregister } from './src/middlewares/form.validation.js';
 
 // Create an instance of the Express server
 const server = express();
@@ -41,19 +42,21 @@ server.get('/', control.index);
 server.get('/jobs', control.jobs);
 server.get('/jobs/:id', control.applyJobs);
 server.get('/login', loginauth, control.login);
-server.get('/newjob', control.postnewjob);
+server.get('/newjob', auth("login as Recruiter."), control.postnewjob);
 server.get('/logout', control.logout);
 server.get('/delete/:id', auth('Allowed only by Recruiters.'), control.deleteJob);
-server.get('/update/:id', auth('Allowed only by Recruiters.'), control.update);
+server.get('/update/:id', auth('Allowed only by Recruiters.'), control.updateJobPage);
 server.get('/search', control.search);
+server.get('/applicants/:id', control.applicants);
 
 // Handle login and registration POST requests
-server.post('/login', control.getlogin);
-server.post("/registerRecruiter", control.registerRecruiter);
+server.post('/login',  control.getlogin);
+server.post("/registerRecruiter", validateRequestregister, control.registerRecruiter);
 
 // Handle job application and creation POST requests
-server.post("/applyJobs/:id", uploadFile.single('imageUrl'), control.jobsApplied);
+server.post("/applyJobs/:id", uploadFile.single('imageUrl'), validateRequestapplyjobs, control.jobsApplied);
 server.post("/newjob", control.createJob);
+server.post("/update/:id", auth('Access Denied'), control.update);
 
 // Export the Express server instance
 export default server;

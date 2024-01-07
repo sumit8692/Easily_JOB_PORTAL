@@ -1,4 +1,11 @@
+
 <div style="display: flex; justify-content: center; align-items: center; height: 80vh; width: 100vw;">
+       
+    <%if(errorMessage){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= errorMessage %>
+        </div>
+        <%}%>
     <form action="/login" method="post" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 500px;">
         <h2 style="text-align: center;">Login</h2>
         <div class="form-group" style="padding-bottom: 10px;">

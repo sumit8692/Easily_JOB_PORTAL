@@ -7,7 +7,7 @@
         <h3 style="font-size: 40px;"> <span style="color: rgb(147, 9, 9); font-size: 40px;"><%= jobDetails.role %></span><span style="color: rgb(4, 101, 4)"> oppurtunity in </i><%= jobDetails.location%> at </span> <span style="color: rgb(4, 101, 4)"></span><span style="color: rgb(28, 186, 186);"><%= jobDetails.company_name %></span></h3>
         </div>
     </div>
-    <div class="p-2 mt-4 mb-4" style="background-color: yellow; color: black; height: 40px; width:150px; display: inline-block">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(18, 20, 18);"></i></div><a href="/update/<%= jobDetails.job_id %>"><i class="fa-regular fa-pen-to-square mx-3" style="color: rgb(23, 123, 162); font-size: 25px;"></i></a><a href="/delete/<%= jobDetails.job_id %>"><i class="fa-solid fa-xmark" style="color:red; font-size: 25px;"></i></a>
+    <div class="p-2 mt-4 mb-4" style="background-color: yellow; color: black; height: 40px; width:150px; display: inline-block">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(18, 20, 18);"></i></div><a href="/update/<%= jobDetails.job_id %>"><i class="fa-regular fa-pen-to-square mx-3" style="color: rgb(23, 123, 162); font-size: 25px;"></i></a><a href="/delete/<%= jobId %>"><i class="fa-solid fa-xmark" style="color:red; font-size: 25px;"></i></a>
     <div class="company-details">
         <div class="company-name m-2"><%= jobDetails.company_name %></div>
         <div class="m-2"><%= jobDetails.job_category %> <%= jobDetails.role %></div>
@@ -15,17 +15,24 @@
         <div class="m-1">Package: &#8377;<%= jobDetails.pack %></div>
         <div class="apply-by-date m-2"><i class="fa-solid fa-clock"></i>Apply By: <%= jobDetails.apply_by %></div>
         <div class="number-of-openings m-2">Number of openings: <%= jobDetails.numberofopenings %></div>
-        <div class="applicants m-2" style="color: red"><i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %></div>
-        <div class="tech-stacks m-3"></div>
-                <% jobDetails.skills.forEach(skill => { %>
-                <button type="button" class="btn btn-outline-info ml-1 mb-1 "><%= skill %></button>
-                <% }) %>
-        </div>
+        <a href="/applicants/<%= jobDetails.job_id %>" style="text-decoration: none; <%= locals.userEmail ? '' : 'pointer-events: none;' %>"">
+            <div class="applicants m-2" style="color: red;">
+              <i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %>
+            </div>
+          </a>
+          <div class="tech-stacks m-3">
+            <% jobDetails.skills.forEach(skill => { %>
+              <button type="button" class="btn btn-outline-info ml-1 mb-1"><%= skill %></button>
+            <% }) %>
+          </div>
+          
 
     <!-- Button trigger modal -->
-    <div style="display: flex; justify-content: left; align-items: center;"><button type="button " class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Apply Now
-    </button></div>
+    <div style="display: flex; justify-content: left; align-items: center;">
+        <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Apply Now
+        </button>
+    </div>
     
 </div>
     <!-- Modal -->
@@ -47,7 +54,7 @@
                     
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="Contact">Email</span>
-                            <input type="text" class="form-control" name="email" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
+                            <input type="email" class="form-control" name="email" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
                         </div>
                     
                         <div class="input-group mb-3">

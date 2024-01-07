@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
-    <form action="/newjob" method="post" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
+    <form action="<%= update ? '/update/' + jobDetails.job_id : '/newjob' %>" method="post" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
         <h3 style="text-align: center;"><%= update ? 'Update Job' : 'Post a New Job' %></h3>
     
         <select class="form-control m-2" name="job_category">
@@ -21,8 +21,8 @@
         </select>
     
         <div class="form-group m-2" style="padding-bottom: 10px; width: 100%">
-            <label for="joblocation">Enter job location</label>
-            <input type="text" class="form-control" id="joblocation" name="job_location" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location : '' %>" required>
+            <label for="joblocation" >Enter job location</label>
+            <input type="text" class="form-control" id="joblocation" name="job_location" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location: '' %>" required>
         </div>
     
         <div class="input-group m-2">

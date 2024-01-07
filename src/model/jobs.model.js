@@ -93,4 +93,43 @@ export default class jobsModel{
 
         return searchResults;
     }
+
+    static update(id, company_name, job_category, role, location, pack, skills) {
+        // Find the index of the job with the specified ID
+        const index = jobs.findIndex((job) => job.job_id == id);
+    
+        // Check if the job with the given ID exists
+        if (index !== -1) {
+            // Update the job details
+            jobs[index].company_name = company_name;
+            jobs[index].job_category = job_category;
+            jobs[index].role = role;
+            jobs[index].location = location;
+            jobs[index].pack = pack;
+            jobs[index].skills = skills;
+    
+            // Return the updated job
+            return jobs[index];
+        } else {
+            // If the job with the given ID does not exist, return null or throw an error
+            return null;
+            // Alternatively, you can throw an error like:
+            // throw new Error(`Job with ID ${id} not found`);
+        }
+    } 
+
+    static updateapplicants(id) {
+    // Find the job with the specified ID
+    const job = jobs.find((job) => job.job_id == id);
+
+    // Check if the job with the given ID exists
+    if (job) {
+        // Update the applicants count
+        job.applicants = (job.applicants || 0) + 1;
+    } else {
+        // If the job with the given ID does not exist, you may want to handle it accordingly
+        console.error(`Job with ID ${id} not found`);
+    }
+}
+
 }
