@@ -59,7 +59,14 @@ export default class jobsModel{
             skills);
         jobs.push(newjob);
     }
-
+    static getSubset(startIndex, endIndex) {
+        return jobs.slice(startIndex, endIndex);
+      }
+      
+      // Function to get the total number of jobs
+    static getTotalJobs() {
+        return jobs.length;
+      }
     static getAll(){
         return jobs;
     }

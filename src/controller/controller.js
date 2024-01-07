@@ -10,10 +10,29 @@ class Controller {
         res.render('index', { isMainPage: true, userEmail: req.session.userEmail });
     }
 
-    jobs(req, res, next){
-        const jobs = jobsModel.getAll();
-        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
-    }
+    jobs(req, res, next) {
+        const itemsPerPage = 3; // Set the number of items to display per page to 3
+        const page = parseInt(req.query.page) || 1; // Get the requested page number from query parameters
+      
+        // Calculate the start and end indices for the current page
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+      
+        // Fetch a limited subset of jobs from the model
+        const jobsSubset = jobsModel.getSubset(startIndex, endIndex);
+      
+        // Calculate the total number of pages based on the total number of jobs
+        const totalJobs = jobsModel.getTotalJobs();
+        const totalPages = Math.ceil(totalJobs / itemsPerPage);
+      
+        res.render('jobs', {
+          isMainPage: true,
+          jobs: jobsSubset,
+          userEmail: req.session.userEmail,
+          currentPage: page,
+          totalPages: totalPages,
+        });
+      }
 
     login(req, res, next){
         res.render('login', { isMainPage: false });
@@ -84,7 +103,7 @@ class Controller {
         const { company_name, job_category, job_designation, job_location, pack, skills } = req.body;
         jobsModel.add(company_name, job_category, job_designation, job_location, pack, skills);
         const jobs = jobsModel.getAll();
-        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
+        res.redirect('/jobs');
     }
 
     // Group: Job Application
