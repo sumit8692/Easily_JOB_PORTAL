@@ -1,6 +1,6 @@
 import server from './index.js'
 
-server.listen(3006, (err) => {
+server.listen(3000, (err) => {
     if (err) {
         console.error('Error starting server:', err);
     } else {

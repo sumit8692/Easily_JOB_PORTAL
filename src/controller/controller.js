@@ -67,7 +67,7 @@ class Controller {
         console.log(email, password)
         if(RecruiterModel.isValidUser(email, password) !== -1){
             req.session.userEmail = email;
-            res.render('jobs', {isMainPage: true, jobs, userEmail: req.session.userEmail});
+            res.redirect('/jobs');
         } else {
             res.render('404error',{isMainPage: true, message: "Invalid Credentials"});
         }
