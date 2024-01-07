@@ -1,4 +1,4 @@
-//importing the necessary modules
+// Importing necessary modules
 import RecruiterModel from "../model/recruiter.model.js";
 import jobsModel from "../model/jobs.model.js";
 import candidateModel from "../model/jobspplied.js";
@@ -6,10 +6,13 @@ import sendmail from "../service/utils/sendMail.js";
 
 class Controller {
     // Group: Rendering Views
+
+    // Renders the main page
     index(req, res, next){
         res.render('index', { isMainPage: true, userEmail: req.session.userEmail });
     }
 
+    // Renders the jobs page with pagination
     jobs(req, res, next) {
         const itemsPerPage = 3; // Set the number of items to display per page to 3
         const page = parseInt(req.query.page) || 1; // Get the requested page number from query parameters
@@ -32,17 +35,21 @@ class Controller {
           currentPage: page,
           totalPages: totalPages,
         });
-      }
+    }
 
+    // Renders the login page
     login(req, res, next){
         res.render('login', { isMainPage: false, errorMessage: false });
     }
 
+    // Renders the page for posting a new job
     postnewjob(req, res, next){
         res.render('newjob',{isMainPage: false, update: false, userEmail: req.session.userEmail })
     }
 
     // Group: User Authentication
+
+    // Handles user logout
     logout(req, res, next) {
         req.session.destroy((err) => {
             if (err) {
@@ -54,6 +61,7 @@ class Controller {
         });
     }
 
+    // Registers a new recruiter
     registerRecruiter(req, res, next){
         const {name, email, password} = req.body;
         console.log(name, email, password);
@@ -61,6 +69,7 @@ class Controller {
         res.redirect('login');
     }
 
+    // Handles user login
     getlogin(req, res, next){
         const {email, password} = req.body;
         const jobs = jobsModel.getAll();
@@ -74,24 +83,29 @@ class Controller {
     }
 
     // Group: Job Operations
+
+    // Renders the job application page
     applyJobs(req, res, next){
         const jobId = req.params.id;
         const jobDetails = jobsModel.getJobDetails(jobId);
         res.render('applyJobs', {isMainPage: false, jobDetails, jobId, userEmail: req.session.userEmail })
     }
 
+    // Deletes a job
     deleteJob(req, res, next){
         const id = req.params.id;
         jobsModel.delete(id);
         res.render('jobs', { isMainPage: true, jobs: jobsModel.getAll(), userEmail: req.session.userEmail });
     }
 
+    // Renders the page for updating a job
     updateJobPage(req, res, next){
         const id = req.params.id;
         const jobDetails = jobsModel.getJobDetails(id);
         res.render('newjob', {isMainPage: false, update: true, jobDetails} )
     }
 
+    // Updates job details
     update(req, res, next) {
         const id = req.params.id;
         let { company_name, job_category, role, location, pack, skills } = req.body;
@@ -109,6 +123,7 @@ class Controller {
         }
     }
     
+    // Searches for jobs
     search(req, res, next){
         const query = req.query.query; // Get the search query from the request
         console.log(query);
@@ -116,6 +131,7 @@ class Controller {
         res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
     }
 
+    // Creates a new job
     createJob(req, res, next){
         const { company_name, job_category, job_designation, job_location, pack, skills } = req.body;
         jobsModel.add(company_name, job_category, job_designation, job_location, pack, skills);
@@ -124,6 +140,8 @@ class Controller {
     }
 
     // Group: Job Application
+
+    // Handles job applications
     jobsApplied(req, res){
         const id = req.params.id;
         const jobDetails = jobsModel.getJobDetails(id);
@@ -137,6 +155,7 @@ class Controller {
         res.render('applyJobs', {isMainPage: false, jobDetails, jobId});
     }
 
+    // Renders the applicants page for a specific job
     applicants(req, res){
         const id = req.params.id;
         const candidates = candidateModel.getcandidateswithjobid(id);
