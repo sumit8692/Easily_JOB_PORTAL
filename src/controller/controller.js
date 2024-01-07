@@ -128,7 +128,11 @@ class Controller {
         const query = req.query.query; // Get the search query from the request
         console.log(query);
         const jobs = jobsModel.searchJobs(query);
-        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
+        res.render('jobs', { isMainPage: true,
+            jobs,
+            userEmail: req.session.userEmail,
+            currentPage: undefined, // Set to undefined or provide a default value
+            totalPages: undefined,  });
     }
 
     // Creates a new job
