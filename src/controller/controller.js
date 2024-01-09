@@ -7,7 +7,7 @@ import sendmail from "../service/utils/sendMail.js";
 class Controller {
     // Group: Rendering Views
     index(req, res, next){
-        res.render('index', { isMainPage: true, userEmail: req.session.userEmail });
+        res.render('index', { isMainPage: true, userEmail: req.session.userEmail, name: req.session.name });
     }
 
     jobs(req, res, next) {
@@ -29,6 +29,7 @@ class Controller {
           isMainPage: true,
           jobs: jobsSubset,
           userEmail: req.session.userEmail,
+          name: req.session.name,
           currentPage: page,
           totalPages: totalPages,
         });
@@ -39,7 +40,7 @@ class Controller {
     }
 
     postnewjob(req, res, next){
-        res.render('newjob',{isMainPage: false, update: false, userEmail: req.session.userEmail })
+        res.render('newjob',{isMainPage: false, update: false, userEmail: req.session.userEmail, name: req.session.name })
     }
 
     // Group: User Authentication
@@ -58,6 +59,7 @@ class Controller {
         const {name, email, password} = req.body;
         console.log(name, email, password);
         RecruiterModel.add(name, email, password);
+
         res.redirect('login');
     }
 
@@ -67,6 +69,7 @@ class Controller {
         console.log(email, password);
         if (RecruiterModel.isValidUser(email, password) !== -1) {
             req.session.userEmail = email;
+            req.session.name = RecruiterModel.getName(email);
             res.redirect('/jobs');
         } else {
             res.render('404error', { isMainPage: true, message: "Invalid Credentials" });
@@ -77,20 +80,18 @@ class Controller {
     applyJobs(req, res, next){
         const jobId = req.params.id;
         const jobDetails = jobsModel.getJobDetails(jobId);
-        res.render('applyJobs', { isMainPage: false, jobDetails, jobId, userEmail: req.session.userEmail });
+        res.render('applyJobs', { isMainPage: false, jobDetails, jobId, userEmail: req.session.userEmail,  name: req.session.name });
     }
 
     deleteJob(req, res, next){
         const id = req.params.id;
         jobsModel.delete(id);
-        const itemsPerPage = 3;
-        const page = parseInt(req.query.page) || 1;
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const jobsSubset = jobsModel.getSubset(startIndex, endIndex);
-        console.log(this);
-        // Use the common renderJobsView method
-        this.renderJobsView(req, res, jobsSubset, page);
+        // const itemsPerPage = 3;
+        // const page = parseInt(req.query.page) || 1;
+        // const startIndex = (page - 1) * itemsPerPage;
+        // const endIndex = startIndex + itemsPerPage;
+        // const jobsSubset = jobsModel.getSubset(startIndex, endIndex);
+        res.redirect('/jobs');
     }
 
     updateJobPage(req, res, next){
@@ -107,7 +108,7 @@ class Controller {
 
         if (updatedJob) {
             const jobs = jobsModel.getAll()
-            res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail });
+            res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail,  name: req.session.name });
         } else {
             res.status(404).send('Job not found');
         }
@@ -117,7 +118,7 @@ class Controller {
         const query = req.query.query; // Get the search query from the request
         console.log(query);
         const jobs = jobsModel.searchJobs(query);
-        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail, currentPage: undefined, totalPages: undefined });
+        res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail, name: req.session.name, currentPage: undefined, totalPages: undefined });
     }
 
     createJob(req, res, next){
@@ -144,7 +145,7 @@ class Controller {
     applicants(req, res){
         const id = req.params.id;
         const candidates = candidateModel.getcandidateswithjobid(id);
-        res.render('applicants', { isMainPage: false, candidates, userEmail: req.session.userEmail });
+        res.render('applicants', { isMainPage: false, candidates, userEmail: req.session.userEmail,  name: req.session.name});
     }
 }
 

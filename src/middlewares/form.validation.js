@@ -8,7 +8,6 @@ const validateRequestapplyjobs = async (req, res, next) => {
     body('name').notEmpty().withMessage('Name is required'),
     body('email').isEmail().withMessage('Invalid email format'),
     body('contact').isMobilePhone().withMessage('Invalid phone number format'),
-    body('imageUrl').isURL().withMessage('Invalid URL'),
   ];
 
   try {

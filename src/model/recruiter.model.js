@@ -28,6 +28,14 @@ export default class RecruiterModel {
       // If result is undefined, return -1; otherwise, return the result
       return result !== undefined ? result : -1;
   }
+  static getName(email){
+    const user = recruiterUsers.find(
+      (u) =>
+          u.email === email
+      );
+
+      return user.name;
+  }
   
   }
   

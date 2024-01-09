@@ -29,4 +29,5 @@ export default class CandidateModel {
     static getcandidateswithjobid(id) {
         return candidates.filter(candidate => candidate.jobId == id);
     }
+
 }
