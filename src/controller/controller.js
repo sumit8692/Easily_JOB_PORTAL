@@ -86,11 +86,6 @@ class Controller {
     deleteJob(req, res, next){
         const id = req.params.id;
         jobsModel.delete(id);
-        // const itemsPerPage = 3;
-        // const page = parseInt(req.query.page) || 1;
-        // const startIndex = (page - 1) * itemsPerPage;
-        // const endIndex = startIndex + itemsPerPage;
-        // const jobsSubset = jobsModel.getSubset(startIndex, endIndex);
         res.redirect('/jobs');
     }
 
