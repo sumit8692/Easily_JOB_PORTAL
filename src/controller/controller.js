@@ -92,7 +92,7 @@ class Controller {
     updateJobPage(req, res, next){
         const id = req.params.id;
         const jobDetails = jobsModel.getJobDetails(id);
-        res.render('newjob', { isMainPage: false, update: true, jobDetails });
+        res.render('newjob', { isMainPage: false, update: true, jobDetails, userEmail: req.session.userEmail, name: req.session.name });
     }
 
     update(req, res, next) {
@@ -100,14 +100,15 @@ class Controller {
         let { company_name, job_category, role, location, pack, skills } = req.body;
         skills = typeof skills === 'string' ? [skills] : skills;
         const updatedJob = jobsModel.update(id, company_name, job_category, role, location, pack, skills);
-
+    
         if (updatedJob) {
-            const jobs = jobsModel.getAll()
-            res.render('jobs', { isMainPage: true, jobs, userEmail: req.session.userEmail,  name: req.session.name });
+                res.redirect('/jobs');
+           
         } else {
             res.status(404).send('Job not found');
         }
     }
+    
     
     search(req, res, next){
         const query = req.query.query; // Get the search query from the request
@@ -117,8 +118,8 @@ class Controller {
     }
 
     createJob(req, res, next){
-        const { company_name, job_category, job_designation, job_location, pack, skills } = req.body;
-        jobsModel.add(company_name, job_category, job_designation, job_location, pack, skills);
+        const { company_name, job_category, role, location, pack, skills } = req.body;
+        jobsModel.add(company_name, job_category, role, location, pack, skills);
         const jobs = jobsModel.getAll();
         res.redirect('/jobs');
     }

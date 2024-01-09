@@ -39,7 +39,7 @@ let jobs = [
         posted: '25/12/2023'
     },
     {
-        job_id: 3,
+        job_id: 4,
         company_name: "Google",
         job_category: "Tech",
         role: "SDE",
@@ -97,13 +97,16 @@ export default class jobsModel{
         return jobs.find((job) => job.job_id == id);
     }
 
-    static delete(id){
-        const index = jobs.findIndex((j) => {
-            j.id == id
-        });
-
-        jobs.splice(index,1);
+    static delete(id) {
+        const index = jobs.findIndex((j) => j.job_id == id);
+    
+        if (index !== -1) {
+            jobs.splice(index, 1);
+        } else {
+            console.error(`Job with ID ${id} not found`);
+        }
     }
+    
     static searchJobs(query) {
         // Convert the query to lowercase for case-insensitive search
         const lowercaseQuery = query.toLowerCase();
@@ -138,7 +141,7 @@ export default class jobsModel{
             jobs[index].skills = skills;
     
             // Return the updated job
-            return jobs[index];
+            return true;
         } else {
             // If the job with the given ID does not exist, return null or throw an error
             return null;

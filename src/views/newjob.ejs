@@ -8,7 +8,7 @@
             <option>Non Tech</option>
         </select>
     
-        <select class="form-control m-2" name="job_designation">
+        <select class="form-control m-2" name="role" required>
             <option selected disabled>select job designation</option>
             <option>HR</option>
             <option>SDE</option>
@@ -22,7 +22,7 @@
     
         <div class="form-group m-2" style="padding-bottom: 10px; width: 100%">
             <label for="joblocation" >Enter job location</label>
-            <input type="text" class="form-control" id="joblocation" name="job_location" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location: '' %>" required>
+            <input type="text" class="form-control" id="joblocation" name="location" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location: '' %>" required>
         </div>
     
         <div class="input-group m-2">
@@ -38,7 +38,7 @@
     
         <div class="input-group m-2" style="display: flex; width: 100%;">
             <div class="form-group" style="flex-grow: 1;">
-                <select multiple class="form-control" id="exampleFormControlSelect2" name="skills" style="width: 100%;">
+                <select multiple class="form-control" id="exampleFormControlSelect2" name="skills" style="width: 100%;" required>
                     <option disabled>Select Skills required for this job</option>
                     <option value="React">React</option>
                     <option value="NodeJs">NodeJs</option>
