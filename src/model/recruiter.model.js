@@ -25,7 +25,7 @@ export default class RecruiterModel {
               u.email === email && u.password === password
       );
       
-      // If result is undefined, return -1; otherwise, return the result
+      
       return result !== undefined ? result : -1;
   }
   static getName(email){

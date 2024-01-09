@@ -97,9 +97,9 @@ class Controller {
 
     update(req, res, next) {
         const id = req.params.id;
-        let { company_name, job_category, role, location, pack, skills } = req.body;
+        let { company_name, job_category, role, location, pack, skills, apply_by } = req.body;
         skills = typeof skills === 'string' ? [skills] : skills;
-        const updatedJob = jobsModel.update(id, company_name, job_category, role, location, pack, skills);
+        const updatedJob = jobsModel.update(id, company_name, job_category, role, location, pack, skills, apply_by);
     
         if (updatedJob) {
                 res.redirect('/jobs');

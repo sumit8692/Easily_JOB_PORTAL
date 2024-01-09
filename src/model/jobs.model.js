@@ -1,4 +1,6 @@
+// Array of job objects representing different job postings
 let jobs = [
+
     {
         job_id: 1,
         company_name: "Coding Ninjas",
@@ -12,6 +14,7 @@ let jobs = [
         applicants: 2,
         posted: '25/11/2023'
     },
+   
     {
         job_id: 2,
         company_name: "Go Digit",
@@ -25,6 +28,7 @@ let jobs = [
         applicants: 4,
         posted: '25/12/2023'
     },
+    
     {
         job_id: 3,
         company_name: "Juspay",
@@ -38,6 +42,7 @@ let jobs = [
         applicants: 5,
         posted: '25/12/2023'
     },
+  
     {
         job_id: 4,
         company_name: "Google",
@@ -51,10 +56,12 @@ let jobs = [
         applicants: 5,
         posted: '01/11/2023'
     }
-]
+];
 
-export default class jobsModel{
-    constructor(job_id, company_name, job_category, role, location, pack, skills){
+// Class representing the job model with various static methods
+export default class jobsModel {
+    // Constructor to initialize job properties
+    constructor(job_id, company_name, job_category, role, location, pack, skills) {
         this.job_id = job_id;
         this.company_name = company_name;
         this.job_category = job_category;
@@ -64,54 +71,64 @@ export default class jobsModel{
         this.skills = skills;
     }
 
-    static add(company_name, job_category, role, location, pack, skills){
+    // Method to add a new job to the jobs array
+    static add(company_name, job_category, role, location, pack, skills) {
+    
         const newjob = new jobsModel(
             jobs.length + 1,
-            company_name, 
-            job_category, 
-            role, 
-            location, 
-            pack, 
-            skills);
+            company_name,
+            job_category,
+            role,
+            location,
+            pack,
+            skills
+        );
 
-            const lastVisitDate = new Date();
-            // Format date with only the date portion
-            const formattedDate = lastVisitDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
-            newjob.posted = formattedDate;
-            
-            jobs.push(newjob);
+        // Get the current date and format it
+        const lastVisitDate = new Date();
+        const formattedDate = lastVisitDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
+        newjob.posted = formattedDate;
+
+        // Add the new job to the jobs array
+        jobs.push(newjob);
     }
+
+    // Method to get a subset of jobs based on start and end indices
     static getSubset(startIndex, endIndex) {
         return jobs.slice(startIndex, endIndex);
-      }
-      
-      // Function to get the total number of jobs
+    }
+
+    // Method to get the total number of jobs
     static getTotalJobs() {
         return jobs.length;
-      }
-    static getAll(){
+    }
+
+    // Method to get all jobs
+    static getAll() {
         return jobs;
     }
 
-    static getJobDetails(id){
+    // Method to get job details by job ID
+    static getJobDetails(id) {
         return jobs.find((job) => job.job_id == id);
     }
 
+    // Method to delete a job by job ID
     static delete(id) {
         const index = jobs.findIndex((j) => j.job_id == id);
-    
+
         if (index !== -1) {
             jobs.splice(index, 1);
         } else {
             console.error(`Job with ID ${id} not found`);
         }
     }
-    
+
+    // Method to search for jobs based on a query
     static searchJobs(query) {
-        // Convert the query to lowercase for case-insensitive search
         const lowercaseQuery = query.toLowerCase();
 
-        // Use the filter method to find jobs that match the specified properties
+        // Filter jobs based on the query
         const searchResults = jobs.filter((job) => {
             return (
                 job.company_name.toLowerCase().includes(lowercaseQuery) ||
@@ -126,40 +143,35 @@ export default class jobsModel{
         return searchResults;
     }
 
-    static update(id, company_name, job_category, role, location, pack, skills) {
-        // Find the index of the job with the specified ID
+    // Method to update job details by job ID
+    static update(id, company_name, job_category, role, location, pack, skills, apply_by) {
         const index = jobs.findIndex((job) => job.job_id == id);
-    
-        // Check if the job with the given ID exists
+
         if (index !== -1) {
-            // Update the job details
+            // Update job details
+            jobs[index].apply_by = apply_by;
             jobs[index].company_name = company_name;
             jobs[index].job_category = job_category;
             jobs[index].role = role;
             jobs[index].location = location;
             jobs[index].pack = pack;
             jobs[index].skills = skills;
-    
-            // Return the updated job
+
             return true;
         } else {
-            // If the job with the given ID does not exist, return null or throw an error
             return null;
         }
-    } 
-
-    static updateapplicants(id) {
-    // Find the job with the specified ID
-    const job = jobs.find((job) => job.job_id == id);
-
-    // Check if the job with the given ID exists
-    if (job) {
-        // Update the applicants count
-        job.applicants = (job.applicants || 0) + 1;
-    } else {
-        // If the job with the given ID does not exist, you may want to handle it accordingly
-        console.error(`Job with ID ${id} not found`);
     }
-}
 
+    // Method to update the number of applicants for a job by job ID
+    static updateapplicants(id) {
+        const job = jobs.find((job) => job.job_id == id);
+
+        if (job) {
+            // Increment the number of applicants for the job
+            job.applicants = (job.applicants || 0) + 1;
+        } else {
+            console.error(`Job with ID ${id} not found`);
+        }
+    }
 }
