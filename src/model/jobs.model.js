@@ -10,6 +10,7 @@ let jobs = [
         numberofopenings: 3,
         apply_by: '04/12/2023',
         applicants: 2,
+        posted: '25/11/2023'
     },
     {
         job_id: 2,
@@ -22,6 +23,7 @@ let jobs = [
         numberofopenings: 2,
         apply_by: '31/12/2023',
         applicants: 4,
+        posted: '25/12/2023'
     },
     {
         job_id: 3,
@@ -34,6 +36,20 @@ let jobs = [
         numberofopenings: 5,
         apply_by: '01/01/2024',
         applicants: 5,
+        posted: '25/12/2023'
+    },
+    {
+        job_id: 3,
+        company_name: "Google",
+        job_category: "Tech",
+        role: "SDE",
+        location: "Bangalore",
+        pack: "20-26lpa",
+        skills: ["React", "SQL", "JS", "AWS", "MONGODB", "Express"],
+        numberofopenings: 5,
+        apply_by: '01/01/2024',
+        applicants: 5,
+        posted: '01/11/2023'
     }
 ]
 
@@ -57,7 +73,13 @@ export default class jobsModel{
             location, 
             pack, 
             skills);
-        jobs.push(newjob);
+
+            const lastVisitDate = new Date();
+            // Format date with only the date portion
+            const formattedDate = lastVisitDate.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
+            newjob.posted = formattedDate;
+            
+            jobs.push(newjob);
     }
     static getSubset(startIndex, endIndex) {
         return jobs.slice(startIndex, endIndex);
@@ -120,8 +142,6 @@ export default class jobsModel{
         } else {
             // If the job with the given ID does not exist, return null or throw an error
             return null;
-            // Alternatively, you can throw an error like:
-            // throw new Error(`Job with ID ${id} not found`);
         }
     } 
 

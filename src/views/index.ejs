@@ -2,7 +2,7 @@
     <img src="banner.png" alt="" height="600px" width="500px">
 </div>
    
-<div class="container">
+<div class="container" style="margin: -10px;">
     <h1 class="above-typewriter">A comprehensive platform for reliable<br /> oppurtunities and internships</h1>
     </h1>
     <div class="typed-out">One stop search for Jobs</div>
@@ -13,7 +13,11 @@
         <button <%= locals.userEmail ? 'disabled' : '' %> type="button" class="btn btn-primary btn-lg m-2" data-bs-toggle="modal" data-bs-target="#button-2">I'm a Recruiter</button>
 
     </div>
-  
+    <% if (locals.lastVisit) { %>
+      <div class="m-2" style="color: white; position: relative;">
+          <span class=""> Last Visited: <%= locals.lastVisit %></span>
+      </div>
+  <% } %>
   <!-- Modal for Recruiter -->
   <div class="modal fade" id="button-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -70,10 +74,12 @@
                       </form>
                 
                     </div>
+                    
             </div>
             </div>
+            
         </div>
       </div>
   
-    
+      
 </div>

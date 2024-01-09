@@ -7,12 +7,14 @@ import { uploadFile } from './src/middlewares/fileupload.middleware.js';
 import session from 'express-session';
 import { auth, loginauth } from './src/middlewares/auth.js';
 import { validateRequestapplyjobs, validateRequestregister } from './src/middlewares/form.validation.js';
-
+import cookieParser from 'cookie-parser';
+import { setLastVisit } from './src/middlewares/lastVIsit.middleware.js';
 // Create an instance of the Express server
 const server = express();
 
 // Create an instance of the controller
 const control = new controller();
+
 
 // Serve static files from the 'public/' directory
 server.use(express.static('public/'));
@@ -24,7 +26,8 @@ server.use(session({
     saveUninitialized: true, 
     cookie: { secure: false },
 }));
-
+server.use(cookieParser());
+server.use(setLastVisit);
 // Use EJS layouts for rendering views
 server.use(ejsLayouts);
 
