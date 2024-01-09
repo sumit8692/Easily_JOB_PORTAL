@@ -1,6 +1,13 @@
+<!-- Heading for the list of applicants -->
 <h1 class="m-5 mb-4">Applicants</h1>
+
+<!-- Container for the table, centered horizontally -->
 <div style="display: flex; justify-content: center; align-items: center; width: 100vw;">
+
+    <!-- Table to display applicant information -->
     <table class="table table-dark m-5">
+
+        <!-- Table header with column names -->
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -10,26 +17,52 @@
                 <th scope="col">Resume</th>
             </tr>
         </thead>
+
+        <!-- Table body with applicant details -->
         <tbody>
+
+            <!-- Loop through each candidate and display their information -->
             <% candidates.forEach((candidate, index) => { %>
                 <tr>
+                    <!-- Displaying the index number -->
                     <th scope="row">
                         <%= index + 1 %>
                     </th>
+                    <!-- Displaying the candidate's name -->
                     <td>
                         <%= candidate.name %>
                     </td>
+                    <!-- Displaying the candidate's email -->
                     <td>
                         <%= candidate.email %>
                     </td>
+                    <!-- Displaying the candidate's contact information -->
                     <td>
                         <%= candidate.contact %>
                     </td>
+                    <!-- Displaying a button to view the candidate's resume -->
                     <td>
-                        <button class="btn btn-success" onclick="viewResume('/images/sumit')">View</button>
+                        <button class="btn btn-success" onclick="viewResume('<%= candidate.imageUrl %>')">View</button>
                     </td>
                 </tr>
             <% }) %>
+
         </tbody>
     </table>
 </div>
+
+
+
+<script>
+    // Function to view a resume by opening it in a new tab
+    function viewResume(resumePath) {
+        // Create a dummy URL using the provided resumePath and the current window's origin
+        const dummyUrl = new URL(resumePath, window.location.origin);
+
+        // Extract the pathname from the dummy URL (actual path without the base path)
+        const cleanPath = dummyUrl.pathname;
+
+        // Open the resume in a new tab using the cleaned pathname
+        window.open(cleanPath, '_blank');
+    }
+</script>
