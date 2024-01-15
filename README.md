@@ -1,4 +1,6 @@
 Easily - Job Portal Project
+
+
 Overview
 This project is a web-based job portal that facilitates the interaction between recruiters and job candidates. Recruiters can post job opportunities, and candidates can search and apply for jobs. The platform aims to streamline the recruitment process, making it efficient for both recruiters and candidates.
 
