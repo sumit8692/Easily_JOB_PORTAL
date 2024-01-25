@@ -59,6 +59,7 @@ Technologies Used
 Frontend:
 
 HTML, CSS
+
 Backend:
 
 Node.js, Express.js, EJS.
