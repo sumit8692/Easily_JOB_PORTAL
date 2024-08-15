@@ -8,8 +8,29 @@ import session from 'express-session';
 import { auth, loginauth } from './src/middlewares/auth.js';
 import { validateRequestapplyjobs, validateRequestregister } from './src/middlewares/form.validation.js';
 import cookieParser from 'cookie-parser';
-import  setLastVisit  from './src/middlewares/lastVIsit.middleware.js';
+// import  setLastVisit  from './src/middlewares/lastVIsit.middleware.js';
 // Create an instance of the Express server
+
+const setLastVisit = (req, res, next) => {
+    if (req.cookies.lastVisit) {
+        const lastVisitDate = new Date(req.cookies.lastVisit);
+        // Format date with 12-hour time and AM/PM
+        const formattedDate = `${lastVisitDate.toLocaleDateString()} ${lastVisitDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+        res.locals.lastVisit = formattedDate;
+    }
+
+    const currentVisitDate = new Date();
+    // Format date with 12-hour time and AM/PM
+    const formattedCurrentDate = `${currentVisitDate.toLocaleDateString()} ${currentVisitDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+    res.cookie('lastVisit', formattedCurrentDate, {
+        maxAge: 2 * 24 * 60 * 60 * 1000,
+    });
+
+    next();
+};
+
+
+
 const server = express();
 
 // Create an instance of the controller
