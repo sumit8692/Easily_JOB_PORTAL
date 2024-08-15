@@ -8,7 +8,7 @@ import session from 'express-session';
 import { auth, loginauth } from './src/middlewares/auth.js';
 import { validateRequestapplyjobs, validateRequestregister } from './src/middlewares/form.validation.js';
 import cookieParser from 'cookie-parser';
-import { setLastVisit } from './src/middlewares/lastVIsit.middleware.js';
+import  setLastVisit  from './src/middlewares/lastVIsit.middleware.js';
 // Create an instance of the Express server
 const server = express();
 
