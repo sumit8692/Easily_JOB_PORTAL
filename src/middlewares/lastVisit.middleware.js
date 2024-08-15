@@ -1,4 +1,4 @@
-export const setLastVisit = (req, res, next) => {
+const setLastVisit = (req, res, next) => {
     if (req.cookies.lastVisit) {
         const lastVisitDate = new Date(req.cookies.lastVisit);
         // Format date with 12-hour time and AM/PM
@@ -15,3 +15,5 @@ export const setLastVisit = (req, res, next) => {
 
     next();
 };
+
+export default setLastVisit;
