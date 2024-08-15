@@ -45,7 +45,7 @@ server.use(session({
     secret: 'secretkey',
     resave: false, 
     saveUninitialized: true, 
-    cookie: { secure: false },
+    cookie: { secure: true },
 }));
 server.use(cookieParser());
 server.use(setLastVisit);
