@@ -1,72 +1,180 @@
-Easily - Job Portal Project
+# Easily — Job Portal
 
+> A full-stack job portal connecting recruiters with top talent. Recruiters can post and manage listings; candidates can search, explore, and apply — all in one place.
 
-Overview
-This project is a web-based job portal that facilitates the interaction between recruiters and job candidates. Recruiters can post job opportunities, and candidates can search and apply for jobs. The platform aims to streamline the recruitment process, making it efficient for both recruiters and candidates.
+![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?style=flat-square&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-4.x-000000?style=flat-square&logo=express&logoColor=white)
+![EJS](https://img.shields.io/badge/EJS-3.x-B4CA65?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
-Features
-For Recruiters:
-Post Jobs:
-Recruiters can create and publish job listings, including details such as job title, description, requirements, and application instructions.
+---
 
-Manage Job Listings:
-Recruiters can view, edit, or delete their posted job listings. This includes updating job details, marking jobs as filled, or removing listings that are no longer available.
+## ✨ Features
 
-Review Applications:
-Recruiters can access and review job applications submitted by candidates. They can view resumes, cover letters, and any additional documents provided by applicants.
+### For Recruiters
+- **Register & Login** — Secure session-based authentication
+- **Post Jobs** — Publish listings with role, location, salary, skills, and deadline
+- **Edit & Delete Listings** — Full control over posted jobs
+- **View Applicants** — See all candidates who applied, with resume access
 
-Communication:
-Recruiters can communicate with candidates through the platform, facilitating a centralized communication channel for the recruitment process.
+### For Candidates
+- **Browse Jobs** — Paginated job listing with card-based layout
+- **Search** — Filter jobs by company, role, location, skills, or salary
+- **Apply** — Submit name, email, phone, and resume in under a minute
+- **Email Confirmation** — Automated confirmation email on application
 
-For Candidates:
-Search and Apply:
-Candidates can search for job opportunities based on various criteria such as job title, location, or industry. They can submit their resumes and cover letters directly through the platform.
+---
 
-Application Tracking:
-Candidates can track the status of their job applications, including whether their application is under review, rejected, or if they have been shortlisted.
+## 🗂 Project Structure
 
-Profile Management:
-Candidates can create and manage their profiles, including updating their resumes, adding work experience, and showcasing their skills.
+```
+Easily_JOB_PORTAL/
+├── index.js                    # Express app setup, middleware, routes
+├── server.js                   # Server entry point (port 3000)
+├── package.json
+├── public/
+│   ├── css/
+│   │   └── style.css           # Modern glassmorphism design system
+│   └── images/                 # Uploaded resumes / static assets
+└── src/
+    ├── controller/
+    │   └── controller.js       # All route handlers
+    ├── middlewares/
+    │   ├── auth.js             # Session-based auth guards
+    │   ├── fileupload.middleware.js  # Multer config for resume uploads
+    │   └── form.validation.js  # express-validator rules
+    ├── model/
+    │   ├── jobs.model.js       # In-memory jobs data + CRUD
+    │   ├── jobspplied.js       # In-memory applications data
+    │   └── recruiter.model.js  # In-memory recruiter accounts
+    ├── service/
+    │   └── utils/
+    │       └── sendMail.js     # Nodemailer email utility
+    └── views/
+        ├── layout.ejs          # Shared navbar + HTML shell
+        ├── index.ejs           # Homepage / hero
+        ├── jobs.ejs            # Job listings grid
+        ├── applyJobs.ejs       # Job detail + application modal
+        ├── login.ejs           # Recruiter login
+        ├── newjob.ejs          # Post / update job form
+        ├── applicants.ejs      # Applicants table for a job
+        └── 404error.ejs        # Error / not-found page
+```
 
-Notifications:
-Candidates receive notifications for application status updates, new job postings matching their criteria, and any messages from recruiters.
+---
 
+## 🚀 Running Locally
 
-Installation
-Clone the repository:
+### Prerequisites
 
-bash
-Copy code
-git clone https://github.com/your-username/job-portal.git
-cd job-portal
-Install dependencies:
+| Tool | Version |
+|------|---------|
+| [Node.js](https://nodejs.org/) | v18 or higher |
+| npm | v9 or higher (bundled with Node) |
 
-bash
-Copy code
+### 1 — Clone the repo
+
+```bash
+git clone https://github.com/sumit8692/Easily_JOB_PORTAL.git
+cd Easily_JOB_PORTAL
+```
+
+### 2 — Install dependencies
+
+```bash
 npm install
-Set up the database:
+```
 
-Configure the database connection in config/database.js.
-Run migrations: npm run migrate
-Start the server:
+### 3 — Configure email (optional)
 
-bash
-Copy code
+Open `src/service/utils/sendMail.js` and replace the credentials with your own Gmail App Password:
+
+```js
+auth: {
+    user: 'your-email@gmail.com',
+    pass: 'your-app-password'   // Generate at myaccount.google.com/apppasswords
+}
+```
+
+> **Note:** Email sending is optional. If credentials are wrong the app will still run — it just logs the error and continues.
+
+### 4 — Start the server
+
+```bash
 npm start
-Access the application at http://localhost:3000.
+```
 
-Technologies Used
-Frontend:
+Open **http://localhost:3000** in your browser.
 
-HTML, CSS
+---
 
-Backend:
+## 🧭 Usage Guide
 
-Node.js, Express.js, EJS.
+### As a Recruiter
+1. Go to **http://localhost:3000**
+2. Click **"I'm a Recruiter"** → fill in name, email, password → **Register**
+3. You'll be redirected to **Login** → sign in with your credentials
+4. Use the **navbar → Post New Job** to create a listing
+5. Browse your listings via **Jobs** → click **View Details** to edit, delete, or see applicants
 
+### As a Candidate
+1. Go to **http://localhost:3000** → click **Browse Jobs**
+2. Use the **search bar** to filter by keyword
+3. Click **View Details** on any job → click **Apply Now**
+4. Fill in your name, email, phone, and upload your resume → **Submit**
+5. A confirmation email will be sent to your inbox
 
-Contributing
-If you'd like to contribute to the project, please follow the contribution guidelines.
+---
 
-License
-This project is licensed under the MIT License.
+## 🛣 Routes
+
+| Method | Route | Description | Auth Required |
+|--------|-------|-------------|:---:|
+| GET | `/` | Homepage | — |
+| GET | `/jobs` | All jobs (paginated) | — |
+| GET | `/jobs/:id` | Job detail + apply | — |
+| GET | `/search` | Search jobs | — |
+| GET | `/login` | Login page | — |
+| POST | `/login` | Submit login | — |
+| POST | `/registerRecruiter` | Register recruiter | — |
+| GET | `/logout` | End session | — |
+| GET | `/newjob` | Post new job form | ✅ |
+| POST | `/newjob` | Create new job | ✅ |
+| GET | `/update/:id` | Edit job form | ✅ |
+| POST | `/update/:id` | Save job edits | ✅ |
+| GET | `/delete/:id` | Delete a job | ✅ |
+| POST | `/applyJobs/:id` | Submit application | — |
+| GET | `/applicants/:id` | View applicants | ✅ |
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Templating | EJS + express-ejs-layouts |
+| Styling | Vanilla CSS (glassmorphism design system) + Bootstrap 5 |
+| File Uploads | Multer |
+| Validation | express-validator |
+| Sessions | express-session + cookie-parser |
+| Email | Nodemailer (Gmail SMTP) |
+| Icons | Font Awesome 6 |
+| Fonts | Inter + Syne (Google Fonts) |
+
+> **Data persistence:** This project uses **in-memory arrays** — data resets on every server restart. There is no database.
+
+---
+
+## ⚠️ Known Limitations
+
+- **No database** — all jobs, recruiters, and applications are stored in memory and lost on restart
+- **No password hashing** — recruiter passwords are stored in plain text (not suitable for production)
+- **Gmail SMTP** — uses a hardcoded app password; rotate or remove before sharing publicly
+
+---
+
+## 📄 License
+
+MIT © [Sumit Shah](https://github.com/sumit8692)
