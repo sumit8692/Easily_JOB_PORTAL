@@ -1,19 +1,23 @@
-<div class="oops">
-    OOPs
-</div>
+<!-- ── ERROR PAGE ── -->
+<div class="error-page-wrapper fade-in">
 
-<div class="img-banner">
-    <img src="/sad404.svg" alt="" height="600px" width="500px">
-</div>
+  <div class="error-img-wrap">
+    <img src="/sad404.svg" alt="Error illustration">
+  </div>
 
-<div class="error-message-recruiter">
-    <%= message %>
-    <span style="transform: rotate(-35deg); 
-                display: inline-block;
-                color: red;
-                font-size: 150px;;
-                position: absolute;
-                top: -200%;
-                left: 100%;">4X4</span>
-</div>
+  <div class="error-code">Oops!</div>
 
+  <div class="error-message">
+    <span class="highlight"><%= message %></span>
+  </div>
+
+  <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+    <a href="/" class="btn-primary-modern">
+      <i class="fa-solid fa-house"></i> Go Home
+    </a>
+    <a href="javascript:history.back()" class="btn-ghost-modern">
+      <i class="fa-solid fa-arrow-left"></i> Go Back
+    </a>
+  </div>
+
+</div>

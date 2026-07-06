@@ -1,85 +1,98 @@
-<div class="img-banner">
-    <img src="banner.png" alt="" height="600px" width="500px">
-</div>
-   
-<div class="container" style="margin: -10px;">
-    <h1 class="above-typewriter">A comprehensive platform for reliable<br /> oppurtunities and internships</h1>
-    </h1>
-    <div class="typed-out">One stop search for Jobs</div>
-    <h1 class="below-typewriter"> Get Discovered. Get Hired.</h1>
-    
-    <div class="btn-container">
-        <button type="button" class="btn btn-primary btn-lg m-2" data-bs-toggle="modal" data-bs-target="#button-1"><a href="/jobs" style="color: white; text-decoration: none;">I'm a Job Seeker</a></button>
-        <button <%= locals.userEmail ? 'disabled' : '' %> type="button" class="btn btn-primary btn-lg m-2" data-bs-toggle="modal" data-bs-target="#button-2">I'm a Recruiter</button>
+<!-- ── HERO SECTION ── -->
+<section class="hero-section fade-in">
 
+  <!-- Left: text content -->
+  <div class="hero-content">
+    <div class="hero-badge">🚀 Now Hiring Nationwide</div>
+
+    <h1 class="hero-title">
+      Find your next<br>
+      <span class="gradient-text">dream career</span>
+    </h1>
+
+    <div class="typed-out">One stop search for Jobs</div>
+
+    <p class="hero-tagline">Get Discovered. Get Hired.</p>
+    <p class="hero-desc">
+      A comprehensive platform connecting talented professionals with top recruiters —
+      from startups to Fortune 500. Opportunities in tech, finance, design, and more.
+    </p>
+
+    <div class="hero-actions">
+      <a href="/jobs" class="btn-primary-modern">
+        <i class="fa-solid fa-briefcase"></i> Browse Jobs
+      </a>
+      <% if (!locals.userEmail) { %>
+        <button type="button" class="btn-ghost-modern" data-bs-toggle="modal" data-bs-target="#recruiterModal">
+          <i class="fa-solid fa-user-tie"></i> I'm a Recruiter
+        </button>
+      <% } else { %>
+        <a href="/newjob" class="btn-ghost-modern">
+          <i class="fa-solid fa-plus"></i> Post a Job
+        </a>
+      <% } %>
     </div>
+
     <% if (locals.lastVisit) { %>
-      <div class="m-2" style="color: white; position: relative;">
-          <span class=""> Last Visited: <%= locals.lastVisit %></span>
+      <div class="last-visit-chip">
+        <i class="fa-regular fa-clock"></i> Last visited: <%= locals.lastVisit %>
       </div>
-  <% } %>
-  <!-- Modal for Recruiter -->
-  <div class="modal fade" id="button-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <button style="position: absolute; right: 20px; top: 20px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="modal-header">
-           
-            <form action="/registerRecruiter" method="post">
-                <h3>Experience Easily!</h3>
-                <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Enter your Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter your email" required>
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-              </form>
-        
+    <% } %>
+  </div>
+
+  <!-- Right: hero illustration -->
+  <div class="hero-image-wrap">
+    <img src="banner.png" alt="Job seekers illustration">
+  </div>
+</section>
+
+<!-- ── RECRUITER REGISTER MODAL ── -->
+<div class="modal fade" id="recruiterModal" tabindex="-1" aria-labelledby="recruiterModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" id="recruiterModalLabel">
+            <i class="fa-solid fa-user-tie me-2" style="color: var(--primary);"></i>Join as Recruiter
+          </h5>
+          <p style="color: var(--text-muted); font-size: 0.8rem; margin: 4px 0 0;">Post jobs and discover top talent instantly.</p>
         </div>
-        
-        <h2 style="margin-left: 10px;">Already Registered?
-          <a href='/login' class="btn btn-success">Login</a>
-          <i class="fa-brands fa-instagram m-1" id="instagram"></i>
-          <i class="fa-brands fa-twitter m-1"  id="twitter"></i>
-          <i class="fa-brands fa-whatsapp m-1" id="whatsapp"></i>
-          <i class="fa-brands fa-linkedin m-1" id="linkedin"></i>
-      </h2>
-        
-        <div class="modal fade" id="recruiterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <button style="position: absolute; right: 20px; top: 20px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-header">
-                   
-                    <form >
-                        <h3>Experience Easily!</h3>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Enter your Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                      </form>
-                
-                    </div>
-                    
-            </div>
-            </div>
-            
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form action="/registerRecruiter" method="post">
+          <div class="mb-3">
+            <label for="reg-name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="reg-name" name="name" placeholder="e.g. Priya Sharma" required>
+          </div>
+          <div class="mb-3">
+            <label for="reg-email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="reg-email" name="email" placeholder="recruiter@company.com" required>
+            <div class="form-text">We'll never share your email with anyone.</div>
+          </div>
+          <div class="mb-4">
+            <label for="reg-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="reg-password" name="password" placeholder="Min. 6 characters" required>
+          </div>
+          <button type="submit" class="btn-primary-modern w-100" style="width:100%;justify-content:center;">
+            <i class="fa-solid fa-rocket"></i> Register Now
+          </button>
+        </form>
+
+        <div style="margin-top: 20px; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+          Already registered?&nbsp;
+          <a href="/login" style="color: var(--primary-glow); font-weight: 600; text-decoration: none;">Login here →</a>
+        </div>
+
+        <div class="social-icons" style="justify-content: center; margin-top: 16px;">
+          <i class="fa-brands fa-instagram" id="instagram"></i>
+          <i class="fa-brands fa-twitter" id="twitter"></i>
+          <i class="fa-brands fa-whatsapp" id="whatsapp"></i>
+          <i class="fa-brands fa-linkedin" id="linkedin"></i>
         </div>
       </div>
-  
-      
+    </div>
+  </div>
 </div>

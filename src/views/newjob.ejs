@@ -1,63 +1,95 @@
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
-    <form action="<%= update ? '/update/' + jobDetails.job_id : '/newjob' %>" method="post" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 1000px;">
-        <h3 style="text-align: center;"><%= update ? 'Update Job' : 'Post a New Job' %></h3>
-    
-        <select class="form-control m-2" name="job_category">
-            <option selected disabled>select job category</option>
-            <option>Tech</option>
-            <option>Non Tech</option>
+<!-- ── POST / UPDATE JOB PAGE ── -->
+<div class="newjob-wrapper fade-in">
+  <div class="newjob-card">
+
+    <h1 class="newjob-title">
+      <% if (update) { %>
+        <i class="fa-solid fa-pen-to-square me-2" style="color: var(--accent);"></i>Update Job Listing
+      <% } else { %>
+        <i class="fa-solid fa-plus-circle me-2" style="color: var(--primary);"></i>Post a New Job
+      <% } %>
+    </h1>
+
+    <form action="<%= update ? '/update/' + jobDetails.job_id : '/newjob' %>" method="post">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+
+        <div class="mb-3">
+          <label class="form-label">Job Category</label>
+          <select class="form-control form-select" name="job_category" required>
+            <option disabled <%= !update ? 'selected' : '' %>>Select category</option>
+            <option <%= update && jobDetails.job_category === 'Tech' ? 'selected' : '' %>>Tech</option>
+            <option <%= update && jobDetails.job_category === 'Non Tech' ? 'selected' : '' %>>Non Tech</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Role / Designation</label>
+          <select class="form-control form-select" name="role" required>
+            <option disabled <%= !update ? 'selected' : '' %>>Select role</option>
+            <% ['HR','SDE','DevOps','Mern Developer','Mean Developer','JAVA Developer','Front-End Developer','Back-End Developer','Angular Developer'].forEach(r => { %>
+              <option <%= update && jobDetails.role === r ? 'selected' : '' %>><%= r %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Company Name</label>
+          <input type="text" class="form-control" name="company_name"
+            placeholder="e.g. Acme Corp"
+            value="<%= update ? jobDetails.company_name : '' %>" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Location</label>
+          <input type="text" class="form-control" name="location"
+            placeholder="e.g. Bengaluru, Remote"
+            value="<%= update ? jobDetails.location : '' %>" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Salary Package</label>
+          <input type="text" class="form-control" name="pack"
+            placeholder="e.g. 12-18lpa"
+            value="<%= update ? jobDetails.pack : '' %>" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Total Openings</label>
+          <input type="number" class="form-control" name="numberofopenings"
+            placeholder="e.g. 5"
+            value="<%= update ? jobDetails.numberofopenings : '' %>" min="1">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Apply By</label>
+          <input type="date" class="form-control" name="apply_by"
+            value="<%= update ? jobDetails.apply_by : '' %>">
+        </div>
+
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Required Skills <span style="color:var(--text-muted);font-size:0.75rem;">(Hold Ctrl/Cmd to select multiple)</span></label>
+        <select multiple class="form-control" name="skills" style="min-height: 130px;" required>
+          <% ['React','NodeJs','Angular','MongoDB','SQL','Express','Java','SpringBoot','C++','Data Structures & Algo','AWS','Docker','Python','TypeScript'].forEach(skill => { %>
+            <option value="<%= skill %>"
+              <%= update && jobDetails.skills && jobDetails.skills.includes(skill) ? 'selected' : '' %>>
+              <%= skill %>
+            </option>
+          <% }) %>
         </select>
-    
-        <select class="form-control m-2" name="role" required>
-            <option selected disabled>select job designation</option>
-            <option>HR</option>
-            <option>SDE</option>
-            <option>DevOps</option>
-            <option>Mern Developer</option>
-            <option>Mean Developer</option>
-            <option>JAVA Developer</option>
-            <option>Front-End Developer</option>
-            <option>Back-End Developer</option>
-        </select>
-    
-        <div class="form-group m-2" style="padding-bottom: 10px; width: 100%">
-            <label for="joblocation" >Enter job location</label>
-            <input type="text" class="form-control" id="joblocation" name="location" placeholder="eg: Bengaluru" value="<%= update ? jobDetails.location: '' %>" required>
-        </div>
-    
-        <div class="input-group m-2">
-            <span class="input-group-text" id="basic-addon1">Company Name</span>
-            <input type="text" class="form-control" name="company_name" placeholder="eg: XYZ" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.company_name : '' %>" required>
-        </div>
-    
-        <div class="input-group m-2">
-            <input type="text" class="form-control" name="pack" placeholder="Salary" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.pack : '' %>" required>
-            <span class="input-group-text" id="basic-addon1">Total Positions</span>
-            <input type="text" class="form-control" name="numberofopenings" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1" value="<%= update ? jobDetails.numberofopenings : '' %>">
-        </div>
-    
-        <div class="input-group m-2" style="display: flex; width: 100%;">
-            <div class="form-group" style="flex-grow: 1;">
-                <select multiple class="form-control" id="exampleFormControlSelect2" name="skills" style="width: 100%;" required>
-                    <option disabled>Select Skills required for this job</option>
-                    <option value="React">React</option>
-                    <option value="NodeJs">NodeJs</option>
-                    <option value="Angular">Angular</option>
-                    <option value="MongoDB">MongoDB</option>
-                    <option value="SQL">SQL</option>
-                    <option value="Express">Express</option>
-                    <option value="Java">Java</option>
-                    <option value="SpringBoot">SpringBoot</option>
-                    <option value="C++">C++</option>
-                    <option value="Data Structures & Algo">Data Structures & Algo</option>
-                </select>
-            </div>
-            <span class="input-group-text" id="inputGroup-sizing-lg" style="width: 20%;">Apply By</span>
-            <input type="date" id="apply_by" name="apply_by" style="width: 30%;">
-        </div>
-    
-        <button type="submit" class="btn btn-success m-2">Submit</button>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center;">
+        <button type="submit" class="btn-primary-modern" style="padding:13px 36px; font-size:0.95rem;">
+          <i class="fa-solid fa-<%= update ? 'floppy-disk' : 'rocket' %>"></i>
+          <%= update ? 'Save Changes' : 'Post Job' %>
+        </button>
+        <a href="/jobs" class="btn-ghost-modern" style="padding:12px 24px; font-size:0.9rem;">
+          Cancel
+        </a>
+      </div>
     </form>
-    
-    
+  </div>
 </div>

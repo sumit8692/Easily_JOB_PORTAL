@@ -1,96 +1,157 @@
-<div style="display: flex; justify-content: center; align-items: center; width: 100vw;  position: relative;">
-<div style="border: 2px rgba(135, 128, 128, 0.884) solid;padding: 30px; border-radius: 10px; margin: 5px;">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-        <h1 class="display-4">Apply for the Job</h1>
-        <br/><br/>
-        <h3 style="font-size: 40px;"> <span style="color: rgb(147, 9, 9); font-size: 40px;"><%= jobDetails.role %></span><span style="color: rgb(4, 101, 4)"> oppurtunity in </i><%= jobDetails.location%> at </span> <span style="color: rgb(4, 101, 4)"></span><span style="color: rgb(28, 186, 186);"><%= jobDetails.company_name %></span></h3>
-        </div>
-    </div>
-    <div class="p-2 mt-4 mb-4" style="background-color: yellow; color: black; height: 40px; width:150px; display: inline-block">Actively Hiring<i class="fa-solid fa-arrow-trend-up" style="color: rgb(18, 20, 18);"></i></div><a href="/update/<%= jobDetails.job_id %>"><i class="fa-regular fa-pen-to-square mx-3" style="color: rgb(23, 123, 162); font-size: 25px;"></i></a><a href="/delete/<%= jobId %>"><i class="fa-solid fa-xmark" style="color:red; font-size: 25px;"></i></a>
-    <div class="company-details">
-        <div class="company-name m-2"><%= jobDetails.company_name %></div>
-        <div class="m-2"><%= jobDetails.job_category %> <%= jobDetails.role %></div>
-        <div class="m-2"><i class="fa-solid fa-location-dot"></i><%= jobDetails.location%></div>
-        <div class="m-1">Package: &#8377;<%= jobDetails.pack %></div>
-        <div class="apply-by-date m-2"><i class="fa-solid fa-clock"></i>Apply By: <%= jobDetails.apply_by %></div>
-        <div class="number-of-openings m-2">Number of openings: <%= jobDetails.numberofopenings %></div>
-        <a href="/applicants/<%= jobDetails.job_id %>" style="text-decoration: none; <%= locals.userEmail ? '' : 'pointer-events: none;' %>"">
-            <div class="applicants m-2" style="color: red;">
-              <i class="fa-solid fa-user-group"></i>Applicants: <%= jobDetails.applicants %>
-            </div>
+<!-- ── JOB DETAIL PAGE ── -->
+<div class="job-detail-wrapper fade-in">
+
+  <div class="job-detail-card">
+
+    <!-- Header row: badges + action icons -->
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom: 20px;">
+      <div class="actively-hiring-pill">
+        <i class="fa-solid fa-arrow-trend-up"></i> Actively Hiring
+      </div>
+      <% if (locals.userEmail) { %>
+        <div class="action-icons ms-auto">
+          <a href="/update/<%= jobDetails.job_id %>" class="action-icon-btn edit" title="Edit Job">
+            <i class="fa-regular fa-pen-to-square"></i>
           </a>
-          <div class="tech-stacks m-3">
-            <% jobDetails.skills.forEach(skill => { %>
-              <button type="button" class="btn btn-outline-info ml-1 mb-1"><%= skill %></button>
-            <% }) %>
-          </div>
-          
-
-    <!-- Button trigger modal -->
-    <div style="display: flex; justify-content: left; align-items: center;">
-        <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Apply Now
-        </button>
-    </div>
-   
-        <div class="m-2" style="color: white; position: relative;">
-            <span class="bg-success"> Posted on: <%= jobDetails.posted %></span>
-
+          <a href="/delete/<%= jobId %>" class="action-icon-btn delete" title="Delete Job">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
         </div>
- 
-    
-    
+      <% } %>
+    </div>
+
+    <!-- Company & Role -->
+    <div class="job-detail-company">
+      <i class="fa-solid fa-building me-1" style="color: var(--text-muted); font-size:0.85rem;"></i>
+      <%= jobDetails.company_name %>
+    </div>
+    <h1 class="job-detail-role">
+      <span><%= jobDetails.role %></span>
+      <span style="color: var(--text-muted); font-size:0.55em; font-weight:600;"> — <%= jobDetails.location %></span>
+    </h1>
+
+    <!-- Meta grid -->
+    <div class="job-meta-grid">
+      <div class="job-meta-item">
+        <span class="job-meta-label"><i class="fa-solid fa-layer-group me-1"></i>Category</span>
+        <span class="job-meta-value"><%= jobDetails.job_category %></span>
+      </div>
+      <div class="job-meta-item">
+        <span class="job-meta-label"><i class="fa-solid fa-location-dot me-1"></i>Location</span>
+        <span class="job-meta-value"><%= jobDetails.location %></span>
+      </div>
+      <div class="job-meta-item">
+        <span class="job-meta-label"><i class="fa-solid fa-indian-rupee-sign me-1"></i>Package</span>
+        <span class="job-meta-value"><%= jobDetails.pack %></span>
+      </div>
+      <div class="job-meta-item">
+        <span class="job-meta-label"><i class="fa-solid fa-calendar-days me-1"></i>Apply By</span>
+        <span class="job-meta-value"><%= jobDetails.apply_by || '—' %></span>
+      </div>
+      <div class="job-meta-item">
+        <span class="job-meta-label"><i class="fa-solid fa-users me-1"></i>Openings</span>
+        <span class="job-meta-value"><%= jobDetails.numberofopenings || '—' %></span>
+      </div>
+      <div class="job-meta-item">
+        <span class="job-meta-label" style="color: var(--danger);"><i class="fa-solid fa-user-group me-1"></i>Applicants</span>
+        <span class="job-meta-value">
+          <a href="/applicants/<%= jobDetails.job_id %>"
+            class="applicants-count"
+            style="<%= locals.userEmail ? '' : 'pointer-events:none;opacity:0.5;' %>">
+            <i class="fa-solid fa-user-group"></i> <%= jobDetails.applicants %>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div style="margin: 20px 0;">
+      <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); margin-bottom:10px;">
+        <i class="fa-solid fa-code me-1"></i>Skills Required
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px;">
+        <% jobDetails.skills.forEach(skill => { %>
+          <button type="button" class="btn-outline-info ml-1 mb-1"><%= skill %></button>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Posted date -->
+    <div class="posted-on-chip">
+      <i class="fa-regular fa-calendar-check"></i> Posted on: <%= jobDetails.posted %>
+    </div>
+
+    <!-- Apply button -->
+    <div style="margin-top: 28px;">
+      <button type="button" class="btn-primary-modern" data-bs-toggle="modal" data-bs-target="#applyModal" style="font-size:1rem; padding:14px 36px;">
+        <i class="fa-solid fa-paper-plane"></i> Apply Now
+      </button>
+    </div>
+  </div>
 </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" style="color: green;">Easily</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div style="border-left: 2px black solid;border-top: 5px black solid; padding: 20px; border-radius: 10px; margin: 50px;">
-                    <form action="/applyJobs/<%= jobId %>" method="post" enctype="multipart/form-data">
-                        <h3 style="text-align: center;" class="m-3">Apply in less than 1 minute</h3>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="name">Name</span>
-                            <input type="text" class="form-control" name="name" placeholder="Enter your name" aria-label="Username" aria-describedby="name">
-                        </div>
-                    
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="Contact">Email</span>
-                            <input type="email" class="form-control" name="email" placeholder="Enter your Email" aria-label="Username" aria-describedby="name">
-                        </div>
-                    
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="name">Contact</span>
-                            <input type="text" class="form-control" name="contact" type="tel" placeholder="+91 ____ __ ____" aria-label="Username" aria-describedby="name">
-                        </div>
-                    
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="Resume">Resume</span>
-                            <input type="file" name="imageUrl" id="imageUrl" accept="images/*" class="form-control" placeholder="total no of positions" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                    
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-success" style="width: 50%;">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+
+<!-- ── APPLICATION MODAL ── -->
+<div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" id="applyModalLabel">
+            <i class="fa-solid fa-paper-plane me-2" style="color: var(--primary);"></i>Apply for this Role
+          </h5>
+          <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 4px;">
+            <%= jobDetails.role %> · <%= jobDetails.company_name %>
+          </p>
         </div>
-        </div>
-    </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form action="/applyJobs/<%= jobId %>" method="post" enctype="multipart/form-data">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-user" style="font-size:0.8rem;"></i></span>
+              <input type="text" class="form-control" name="name" placeholder="Enter your full name" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-envelope" style="font-size:0.8rem;"></i></span>
+              <input type="email" class="form-control" name="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-phone" style="font-size:0.8rem;"></i></span>
+              <input type="tel" class="form-control" name="contact" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Resume / CV</label>
+            <input type="file" name="imageUrl" id="imageUrl" class="form-control" required>
+            <div class="form-text">Upload your resume (PDF, DOC, or image)</div>
+          </div>
+
+          <button type="submit" class="btn-primary-modern" style="width:100%;justify-content:center;font-size:0.95rem;padding:13px;">
+            <i class="fa-solid fa-rocket"></i> Submit Application
+          </button>
+        </form>
+      </div>
+
+      <div class="modal-footer" style="justify-content:center;">
+        <button type="button" class="btn-ghost-modern" data-bs-dismiss="modal" style="font-size:0.85rem; padding:8px 20px;">
+          Cancel
+        </button>
+      </div>
 
     </div>
-    
+  </div>
 </div>

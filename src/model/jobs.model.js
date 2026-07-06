@@ -61,7 +61,8 @@ let jobs = [
 // Class representing the job model with various static methods
 export default class jobsModel {
     // Constructor to initialize job properties
-    constructor(job_id, company_name, job_category, role, location, pack, skills) {
+    // Constructor to initialize job properties
+    constructor(job_id, company_name, job_category, role, location, pack, skills, numberofopenings, apply_by) {
         this.job_id = job_id;
         this.company_name = company_name;
         this.job_category = job_category;
@@ -69,19 +70,24 @@ export default class jobsModel {
         this.location = location;
         this.pack = pack;
         this.skills = skills;
+        this.numberofopenings = numberofopenings;
+        this.apply_by = apply_by;
+        this.applicants = 0;
     }
 
     // Method to add a new job to the jobs array
-    static add(company_name, job_category, role, location, pack, skills) {
-    
+    static add(company_name, job_category, role, location, pack, skills, numberofopenings, apply_by) {
+        const nextId = jobs.length > 0 ? Math.max(...jobs.map((job) => job.job_id)) + 1 : 1;
         const newjob = new jobsModel(
-            jobs.length + 1,
+            nextId,
             company_name,
             job_category,
             role,
             location,
             pack,
-            skills
+            skills,
+            numberofopenings,
+            apply_by
         );
 
         // Get the current date and format it
@@ -144,7 +150,7 @@ export default class jobsModel {
     }
 
     // Method to update job details by job ID
-    static update(id, company_name, job_category, role, location, pack, skills, apply_by) {
+    static update(id, company_name, job_category, role, location, pack, skills, apply_by, numberofopenings) {
         const index = jobs.findIndex((job) => job.job_id == id);
 
         if (index !== -1) {
@@ -156,6 +162,7 @@ export default class jobsModel {
             jobs[index].location = location;
             jobs[index].pack = pack;
             jobs[index].skills = skills;
+            jobs[index].numberofopenings = numberofopenings;
 
             return true;
         } else {

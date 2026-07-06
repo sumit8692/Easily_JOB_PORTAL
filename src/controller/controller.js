@@ -97,9 +97,9 @@ class Controller {
 
     update(req, res, next) {
         const id = req.params.id;
-        let { company_name, job_category, role, location, pack, skills, apply_by } = req.body;
+        let { company_name, job_category, role, location, pack, skills, apply_by, numberofopenings } = req.body;
         skills = typeof skills === 'string' ? [skills] : skills;
-        const updatedJob = jobsModel.update(id, company_name, job_category, role, location, pack, skills, apply_by);
+        const updatedJob = jobsModel.update(id, company_name, job_category, role, location, pack, skills, apply_by, numberofopenings);
     
         if (updatedJob) {
                 res.redirect('/jobs');
@@ -118,8 +118,8 @@ class Controller {
     }
 
     createJob(req, res, next){
-        const { company_name, job_category, role, location, pack, skills } = req.body;
-        jobsModel.add(company_name, job_category, role, location, pack, skills);
+        const { company_name, job_category, role, location, pack, skills, numberofopenings, apply_by } = req.body;
+        jobsModel.add(company_name, job_category, role, location, pack, skills, numberofopenings, apply_by);
         const jobs = jobsModel.getAll();
         res.redirect('/jobs');
     }
@@ -130,12 +130,12 @@ class Controller {
         const jobDetails = jobsModel.getJobDetails(id);
         const { name, email, contact } = req.body;
         const jobId = req.params.id;
-        const imageUrl = 'images/' + req.file.filename;
+        const imageUrl = req.file ? 'images/' + req.file.filename : 'images/download.png';
         sendmail(email);
         console.log(name, email, contact, jobId);
         candidateModel.add(name, email, contact, imageUrl, jobId);
         jobsModel.updateapplicants(id);
-        res.render('applyJobs', { isMainPage: false, jobDetails, jobId });
+        res.render('applyJobs', { isMainPage: false, jobDetails, jobId, userEmail: req.session.userEmail, name: req.session.name });
     }
 
     applicants(req, res){

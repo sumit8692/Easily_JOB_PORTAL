@@ -1,23 +1,45 @@
+<!-- ── LOGIN PAGE ── -->
+<div class="login-wrapper fade-in">
+  <div class="login-card">
 
-<div style="display: flex; justify-content: center; align-items: center; height: 80vh; width: 100vw;">
-       
-    <%if(errorMessage){ %>
-        <div class="alert alert-danger" role="alert">
-            <%= errorMessage %>
+    <div style="text-align:center; margin-bottom: 28px;">
+      <div style="width:56px; height:56px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display:inline-flex; align-items:center; justify-content:center; margin-bottom:16px; box-shadow: 0 8px 24px hsla(220, 90%, 60%, 0.35);">
+        <i class="fa-solid fa-lock" style="color:#fff; font-size:1.2rem;"></i>
+      </div>
+      <h1 class="login-title">Welcome Back</h1>
+      <p class="login-subtitle">Sign in to your recruiter account</p>
+    </div>
+
+    <% if (errorMessage) { %>
+      <div style="background: hsla(10, 80%, 58%, 0.1); border: 1px solid hsla(10, 80%, 58%, 0.3); color: var(--danger); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 20px; font-size: 0.875rem; display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-circle-exclamation"></i> <%= errorMessage %>
+      </div>
+    <% } %>
+
+    <form action="/login" method="post">
+      <div class="mb-3">
+        <label for="loginEmail" class="form-label">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-envelope" style="font-size:0.8rem;"></i></span>
+          <input type="email" class="form-control" id="loginEmail" name="email" placeholder="recruiter@company.com" required>
         </div>
-        <%}%>
-    <form action="/login" method="post" style="border-top: 5px rgba(135, 128, 128, 0.884) solid;border-left: 2px rgba(135, 128, 128, 0.884) solid; padding: 30px; border-radius: 10px;height: auto; width: 500px;">
-        <h2 style="text-align: center;">Login</h2>
-        <div class="form-group" style="padding-bottom: 10px;">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" style="width: 100%;" required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="mb-4">
+        <label for="loginPassword" class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-key" style="font-size:0.8rem;"></i></span>
+          <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Enter your password" required>
         </div>
-        
-        <div class="form-group" style="padding-bottom: 10px;">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" style="width: 100%;" required>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button> 
+      </div>
+      <button type="submit" class="btn-primary-modern" style="width:100%;justify-content:center;font-size:0.95rem;padding:13px;">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+      </button>
     </form>
+
+    <div style="text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 0.85rem;">
+      Don't have an account?&nbsp;
+      <a href="/" style="color: var(--primary-glow); font-weight: 600; text-decoration: none;">Register on homepage →</a>
+    </div>
+
+  </div>
 </div>
