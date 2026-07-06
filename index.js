@@ -3,11 +3,16 @@ import express from 'express';
 import ejsLayouts from 'express-ejs-layouts';
 import controller from './src/controller/controller.js';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { uploadFile } from './src/middlewares/fileupload.middleware.js';
 import session from 'express-session';
 import { auth, loginauth } from './src/middlewares/auth.js';
 import { validateRequestapplyjobs, validateRequestregister } from './src/middlewares/form.validation.js';
 import cookieParser from 'cookie-parser';
+
+// ESM-compatible __dirname (path.resolve() is unreliable in Vercel serverless)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // import  setLastVisit  from './src/middlewares/lastVIsit.middleware.js';
 // Create an instance of the Express server
 
@@ -38,7 +43,8 @@ const control = new controller();
 
 
 // Serve static files from the 'public/' directory
-server.use(express.static('public/'));
+// Absolute path required for Vercel — relative paths break in serverless
+server.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize session middleware
 server.use(session({
@@ -56,7 +62,7 @@ server.use(ejsLayouts);
 server.set('view engine', 'ejs');
 
 // Set the views directory to 'src/views'
-server.set('views', path.join(path.resolve(), 'src', 'views'));
+server.set('views', path.join(__dirname, 'src', 'views'));
 
 // Enable parsing of URL-encoded data
 server.use(express.urlencoded({ extended: true }));
